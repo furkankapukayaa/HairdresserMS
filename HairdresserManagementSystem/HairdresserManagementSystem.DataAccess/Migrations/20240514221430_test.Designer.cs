@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HairdresserManagementSystem.DataAccess.Migrations
 {
     [DbContext(typeof(HairdresserMSContext))]
-    [Migration("20240514113654_db-create")]
-    partial class dbcreate
+    [Migration("20240514221430_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,6 +199,10 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NameSurname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
