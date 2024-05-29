@@ -29,112 +29,145 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            LoginPictureBox = new PictureBox();
-            loginGroupBox = new GroupBox();
-            LoginButton = new Button();
-            MailTextBox = new TextBox();
-            PasswordTextBox = new TextBox();
-            PasswordLabel = new Label();
-            MailLabel = new Label();
-            ((System.ComponentModel.ISupportInitialize)LoginPictureBox).BeginInit();
-            loginGroupBox.SuspendLayout();
+            pictureBoxLogin = new PictureBox();
+            groupBoxLogin = new GroupBox();
+            btnLogin = new Button();
+            txtMail = new TextBox();
+            txtPassword = new TextBox();
+            lblPassword = new Label();
+            lblMail = new Label();
+            lblTitle = new Label();
+            pictureBoxLogin2 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogin).BeginInit();
+            groupBoxLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogin2).BeginInit();
             SuspendLayout();
             // 
-            // LoginPictureBox
+            // pictureBoxLogin
             // 
-            LoginPictureBox.Image = (Image)resources.GetObject("LoginPictureBox.Image");
-            LoginPictureBox.Location = new Point(12, 116);
-            LoginPictureBox.Name = "LoginPictureBox";
-            LoginPictureBox.Size = new Size(503, 398);
-            LoginPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            LoginPictureBox.TabIndex = 0;
-            LoginPictureBox.TabStop = false;
+            pictureBoxLogin.Image = (Image)resources.GetObject("pictureBoxLogin.Image");
+            pictureBoxLogin.Location = new Point(220, 12);
+            pictureBoxLogin.Name = "pictureBoxLogin";
+            pictureBoxLogin.Size = new Size(224, 443);
+            pictureBoxLogin.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxLogin.TabIndex = 0;
+            pictureBoxLogin.TabStop = false;
             // 
-            // loginGroupBox
+            // groupBoxLogin
             // 
-            loginGroupBox.Controls.Add(LoginButton);
-            loginGroupBox.Controls.Add(MailTextBox);
-            loginGroupBox.Controls.Add(PasswordTextBox);
-            loginGroupBox.Controls.Add(PasswordLabel);
-            loginGroupBox.Controls.Add(MailLabel);
-            loginGroupBox.Font = new Font("Myriad Pro Light", 11.9999981F, FontStyle.Bold);
-            loginGroupBox.Location = new Point(560, 222);
-            loginGroupBox.Name = "loginGroupBox";
-            loginGroupBox.Size = new Size(460, 219);
-            loginGroupBox.TabIndex = 1;
-            loginGroupBox.TabStop = false;
-            loginGroupBox.Text = "Giriş Yap";
+            groupBoxLogin.Controls.Add(btnLogin);
+            groupBoxLogin.Controls.Add(txtMail);
+            groupBoxLogin.Controls.Add(txtPassword);
+            groupBoxLogin.Controls.Add(lblPassword);
+            groupBoxLogin.Controls.Add(lblMail);
+            groupBoxLogin.Font = new Font("Myriad Pro Light", 11.9999981F, FontStyle.Bold);
+            groupBoxLogin.Location = new Point(474, 164);
+            groupBoxLogin.Name = "groupBoxLogin";
+            groupBoxLogin.Size = new Size(460, 219);
+            groupBoxLogin.TabIndex = 1;
+            groupBoxLogin.TabStop = false;
+            groupBoxLogin.Text = "Giriş Yap";
             // 
-            // LoginButton
+            // btnLogin
             // 
-            LoginButton.Location = new Point(324, 172);
-            LoginButton.Name = "LoginButton";
-            LoginButton.Size = new Size(130, 41);
-            LoginButton.TabIndex = 4;
-            LoginButton.Text = "Giriş Yap";
-            LoginButton.UseVisualStyleBackColor = true;
-            LoginButton.Click += LoginButton_Click;
+            btnLogin.Location = new Point(324, 172);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(130, 41);
+            btnLogin.TabIndex = 4;
+            btnLogin.Text = "Giriş Yap";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
-            // MailTextBox
+            // txtMail
             // 
-            MailTextBox.Location = new Point(91, 72);
-            MailTextBox.Name = "MailTextBox";
-            MailTextBox.Size = new Size(198, 27);
-            MailTextBox.TabIndex = 0;
-            MailTextBox.Text = "admin@hairdresserms";
+            txtMail.Font = new Font("Yu Gothic UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtMail.Location = new Point(91, 68);
+            txtMail.Name = "txtMail";
+            txtMail.Size = new Size(198, 29);
+            txtMail.TabIndex = 0;
+            txtMail.Text = "admin@hairdresserms";
             // 
-            // PasswordTextBox
+            // txtPassword
             // 
-            PasswordTextBox.Location = new Point(91, 124);
-            PasswordTextBox.Name = "PasswordTextBox";
-            PasswordTextBox.PasswordChar = '*';
-            PasswordTextBox.Size = new Size(198, 27);
-            PasswordTextBox.TabIndex = 1;
-            PasswordTextBox.Text = "a";
+            txtPassword.Font = new Font("Yu Gothic UI Semibold", 12F, FontStyle.Bold);
+            txtPassword.Location = new Point(91, 120);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(198, 29);
+            txtPassword.TabIndex = 1;
+            txtPassword.Text = "a";
             // 
-            // PasswordLabel
+            // lblPassword
             // 
-            PasswordLabel.AutoSize = true;
-            PasswordLabel.Location = new Point(41, 124);
-            PasswordLabel.Name = "PasswordLabel";
-            PasswordLabel.Size = new Size(44, 20);
-            PasswordLabel.TabIndex = 3;
-            PasswordLabel.Text = "Şifre:";
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new Point(41, 124);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(44, 20);
+            lblPassword.TabIndex = 3;
+            lblPassword.Text = "Şifre:";
             // 
-            // MailLabel
+            // lblMail
             // 
-            MailLabel.AutoSize = true;
-            MailLabel.Location = new Point(43, 72);
-            MailLabel.Name = "MailLabel";
-            MailLabel.Size = new Size(42, 20);
-            MailLabel.TabIndex = 2;
-            MailLabel.Text = "Mail:";
+            lblMail.AutoSize = true;
+            lblMail.Location = new Point(43, 72);
+            lblMail.Name = "lblMail";
+            lblMail.Size = new Size(42, 20);
+            lblMail.TabIndex = 2;
+            lblMail.Text = "Mail:";
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Roboto Condensed Light", 24F, FontStyle.Italic, GraphicsUnit.Point, 162);
+            lblTitle.Location = new Point(569, 132);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(365, 38);
+            lblTitle.TabIndex = 2;
+            lblTitle.Text = "HairdresserMS Hoş Geldiniz!";
+            // 
+            // pictureBoxLogin2
+            // 
+            pictureBoxLogin2.BackColor = Color.Transparent;
+            pictureBoxLogin2.Image = (Image)resources.GetObject("pictureBoxLogin2.Image");
+            pictureBoxLogin2.Location = new Point(2, 12);
+            pictureBoxLogin2.Name = "pictureBoxLogin2";
+            pictureBoxLogin2.Size = new Size(224, 443);
+            pictureBoxLogin2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxLogin2.TabIndex = 3;
+            pictureBoxLogin2.TabStop = false;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1095, 627);
-            Controls.Add(loginGroupBox);
-            Controls.Add(LoginPictureBox);
+            ClientSize = new Size(980, 485);
+            Controls.Add(pictureBoxLogin2);
+            Controls.Add(lblTitle);
+            Controls.Add(groupBoxLogin);
+            Controls.Add(pictureBoxLogin);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Login";
-            ((System.ComponentModel.ISupportInitialize)LoginPictureBox).EndInit();
-            loginGroupBox.ResumeLayout(false);
-            loginGroupBox.PerformLayout();
+            Text = "HairdresserMS - Giriş Yap";
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogin).EndInit();
+            groupBoxLogin.ResumeLayout(false);
+            groupBoxLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLogin2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private PictureBox LoginPictureBox;
-        private GroupBox loginGroupBox;
-        private Label PasswordLabel;
-        private Label MailLabel;
-        private TextBox PasswordTextBox;
-        private TextBox MailTextBox;
-        private Button LoginButton;
+        private PictureBox pictureBoxLogin;
+        private GroupBox groupBoxLogin;
+        private Label lblPassword;
+        private Label lblMail;
+        private TextBox txtPassword;
+        private TextBox txtMail;
+        private Button btnLogin;
+        private Label lblTitle;
+        private PictureBox pictureBoxLogin2;
     }
 }

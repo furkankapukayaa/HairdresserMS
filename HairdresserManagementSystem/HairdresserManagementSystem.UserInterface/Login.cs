@@ -13,11 +13,17 @@ namespace HairdresserManagementSystem.UserInterface
 
         private BaseFormObject baseFormObject = new BaseFormObject();
         private string loggedInUserId;
-        private void LoginButton_Click(object sender, EventArgs e)
+
+        private void OpenHomePage(object obj)
         {
-            if (MailTextBox.Text != string.Empty && PasswordTextBox.Text != string.Empty)
+            Application.Run(new Home(loggedInUserId));
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtMail.Text != string.Empty && txtPassword.Text != string.Empty)
             {
-                var mailControl = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Email == MailTextBox.Text);
+                var mailControl = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Email == txtMail.Text);
                 if (mailControl == null)
                 {
                     MessageBox.Show("Bu mail hesabına sahip bir kullanıcı bulunmamaktadır.", "HairdresserManagementSystem - Hatalı Mail Adresi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -36,7 +42,7 @@ namespace HairdresserManagementSystem.UserInterface
                         return;
                     }
 
-                    var passwordControl = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Email == MailTextBox.Text && x.Password == PasswordTextBox.Text && x.Status == true && x.IsDeleted == false);
+                    var passwordControl = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Email == txtMail.Text && x.Password == txtPassword.Text && x.Status == true && x.IsDeleted == false);
                     if (passwordControl == null)
                     {
                         MessageBox.Show("Hatalı şifre girdiniz.", "HairdresserManagementSystem - Hatalı Şifre!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -57,11 +63,6 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 MessageBox.Show("Lütfen tüm alanları doldurunuz.", "HairdresserManagementSystem - Hatalı Bilgi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void OpenHomePage(object obj)
-        {
-            Application.Run(new Home(loggedInUserId));
         }
     }
 }
