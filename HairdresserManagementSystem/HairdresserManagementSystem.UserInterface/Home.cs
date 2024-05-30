@@ -4,15 +4,15 @@ namespace HairdresserManagementSystem.UserInterface
 {
     public partial class Home : Form
     {
-        public Home(string onlineUserId)
+        public Home(string loggedInUserId)
         {
             InitializeComponent();
             FormDesign();
-            _onlineUserId = onlineUserId;
+            _loggedInUserId = loggedInUserId;
         }
 
         private BaseFormObject baseFormObject = new BaseFormObject();
-        private string _onlineUserId;
+        private string _loggedInUserId;
 
         public void FormDesign()
         {
@@ -44,7 +44,7 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void OpenSettingsPage()
         {
-            Application.Run(new Settings(_onlineUserId));
+            Application.Run(new Settings(_loggedInUserId));
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

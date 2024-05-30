@@ -149,9 +149,9 @@
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Location = new Point(1021, 551);
+            btnLogout.Location = new Point(1027, 560);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(62, 64);
+            btnLogout.Size = new Size(56, 55);
             btnLogout.TabIndex = 5;
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;

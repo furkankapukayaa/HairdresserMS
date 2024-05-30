@@ -9,6 +9,7 @@ namespace HairdresserManagementSystem.UserInterface
             InitializeComponent();
             AppSettings appSettings = new AppSettings();
             appSettings.CreateAdmin();
+            appSettings.CreateWorkplace();
         }
 
         private BaseFormObject baseFormObject = new BaseFormObject();

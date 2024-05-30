@@ -36,5 +36,34 @@ namespace HairdresserManagementSystem.UserInterface.Events
                 hairdresserMSContext.SaveChanges();
             }
         }
+
+        public void CreateWorkplace()
+        {
+            var workplaceControl = hairdresserMSContext.Settings.FirstOrDefault(x => x.Id == "77c8da8c22aa4743a2435e9479fd60f4");
+            if (workplaceControl == null)
+            {
+                Entity.DomainObject.Settings workplace = new Entity.DomainObject.Settings
+                {
+                    Id = "77c8da8c22aa4743a2435e9479fd60f4",
+                    WorkplaceName = "Kapukaya Hair Mansion",
+                    WorkplaceAddress = "İstanbul",
+                    WorkplacePhone = "05555555555",
+                    WorkplaceAuthority = "Furkan Kapukaya"
+                };
+
+                hairdresserMSContext.Settings.Add(workplace);
+                hairdresserMSContext.SaveChanges();
+            }
+            else
+            {
+                workplaceControl.WorkplaceName = "Kapukaya Hair Mansion";
+                workplaceControl.WorkplaceAddress = "İstanbul";
+                workplaceControl.WorkplacePhone = "05555555555";
+                workplaceControl.WorkplaceAuthority = "Furkan Kapukaya";
+                workplaceControl.IsDeleted = false;
+                workplaceControl.Status = true;
+                hairdresserMSContext.SaveChanges();
+            }
+        }
     }
 }
