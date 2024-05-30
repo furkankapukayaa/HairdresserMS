@@ -53,7 +53,7 @@
             btnChairs.ImageAlign = ContentAlignment.TopCenter;
             btnChairs.ImageKey = "chair.png";
             btnChairs.ImageList = imageListButtons;
-            btnChairs.Location = new Point(145, 222);
+            btnChairs.Location = new Point(12, 215);
             btnChairs.Name = "btnChairs";
             btnChairs.Size = new Size(154, 154);
             btnChairs.TabIndex = 0;
@@ -81,7 +81,7 @@
             btnAppointments.ImageAlign = ContentAlignment.TopCenter;
             btnAppointments.ImageKey = "appointment.png";
             btnAppointments.ImageList = imageListButtons;
-            btnAppointments.Location = new Point(305, 222);
+            btnAppointments.Location = new Point(227, 215);
             btnAppointments.Name = "btnAppointments";
             btnAppointments.Size = new Size(154, 154);
             btnAppointments.TabIndex = 1;
@@ -98,7 +98,7 @@
             btnOrders.ImageAlign = ContentAlignment.TopCenter;
             btnOrders.ImageKey = "orders.png";
             btnOrders.ImageList = imageListButtons;
-            btnOrders.Location = new Point(465, 222);
+            btnOrders.Location = new Point(458, 215);
             btnOrders.Name = "btnOrders";
             btnOrders.Size = new Size(154, 154);
             btnOrders.TabIndex = 2;
@@ -115,7 +115,7 @@
             btnCustomers.ImageAlign = ContentAlignment.TopCenter;
             btnCustomers.ImageKey = "customers.png";
             btnCustomers.ImageList = imageListButtons;
-            btnCustomers.Location = new Point(625, 222);
+            btnCustomers.Location = new Point(690, 215);
             btnCustomers.Name = "btnCustomers";
             btnCustomers.Size = new Size(154, 154);
             btnCustomers.TabIndex = 3;
@@ -132,13 +132,14 @@
             btnSettings.ImageAlign = ContentAlignment.TopCenter;
             btnSettings.ImageKey = "settings.png";
             btnSettings.ImageList = imageListButtons;
-            btnSettings.Location = new Point(785, 222);
+            btnSettings.Location = new Point(929, 215);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(154, 154);
             btnSettings.TabIndex = 4;
             btnSettings.Text = "Yönetim";
             btnSettings.TextAlign = ContentAlignment.BottomCenter;
             btnSettings.UseVisualStyleBackColor = false;
+            btnSettings.Click += btnSettings_Click;
             // 
             // btnLogout
             // 
@@ -158,7 +159,7 @@
             // pictureBoxLogo
             // 
             pictureBoxLogo.Image = (Image)resources.GetObject("pictureBoxLogo.Image");
-            pictureBoxLogo.Location = new Point(28, 528);
+            pictureBoxLogo.Location = new Point(987, 12);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(77, 64);
             pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -169,7 +170,7 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Trebuchet MS", 11.25F, FontStyle.Bold);
-            lblTitle.Location = new Point(13, 595);
+            lblTitle.Location = new Point(972, 79);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(108, 20);
             lblTitle.TabIndex = 7;
@@ -179,7 +180,7 @@
             // 
             lblCalendar.AutoSize = true;
             lblCalendar.Font = new Font("Myriad Pro Light", 15.7499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCalendar.Location = new Point(825, 35);
+            lblCalendar.Location = new Point(16, 18);
             lblCalendar.Name = "lblCalendar";
             lblCalendar.Size = new Size(123, 26);
             lblCalendar.TabIndex = 8;

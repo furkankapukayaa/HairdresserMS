@@ -8,9 +8,11 @@ namespace HairdresserManagementSystem.UserInterface
         {
             InitializeComponent();
             FormDesign();
+            _onlineUserId = onlineUserId;
         }
 
         private BaseFormObject baseFormObject = new BaseFormObject();
+        private string _onlineUserId;
 
         public void FormDesign()
         {
@@ -40,6 +42,11 @@ namespace HairdresserManagementSystem.UserInterface
             Application.Run(new Login());
         }
 
+        private void OpenSettingsPage()
+        {
+            Application.Run(new Settings(_onlineUserId));
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             MessageBox.Show("HairdresserMS İyi günler diler! Girişe yönlendiriliyorsunuz!", "HairdresserManagementSystem - Güle Güle", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -52,6 +59,14 @@ namespace HairdresserManagementSystem.UserInterface
         private void timerCalendar_Tick(object sender, EventArgs e)
         {
             lblCalendar.Text = DateTime.Now.ToLongDateString() + "\n" + DateTime.Now.ToLongTimeString();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            baseFormObject.thread = new Thread(OpenSettingsPage);
+            baseFormObject.thread.SetApartmentState(ApartmentState.STA);
+            baseFormObject.thread.Start();
         }
     }
 }
