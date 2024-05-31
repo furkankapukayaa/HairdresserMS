@@ -8,11 +8,20 @@ namespace HairdresserManagementSystem.UserInterface
         {
             InitializeComponent();
             GetWorkplace();
+            DataList();
             _loggedInUserId = loggedInUserId;
         }
 
         private BaseFormObject baseFormObject = new BaseFormObject();
         private string _loggedInUserId;
+
+        public void DataList()
+        {
+            dataGridViewEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.ToList();
+            dataGridViewChair.DataSource = baseFormObject.hairdresserMSContext.Chairs.ToList();
+            dataGridViewCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.ToList();
+            dataGridViewProduct.DataSource = baseFormObject.hairdresserMSContext.Products.ToList();
+        }
 
         private void OpenHomePage()
         {

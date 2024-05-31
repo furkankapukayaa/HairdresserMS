@@ -53,7 +53,7 @@
             lblEmployeeType = new Label();
             lblEmployeeEmail = new Label();
             lblEmployeeName = new Label();
-            btnEmployeeSave = new Button();
+            btnEmployeeAdd = new Button();
             comboBoxEmployeeType = new ComboBox();
             txtEmployeePhone = new TextBox();
             txtEmployeePassword = new TextBox();
@@ -66,11 +66,12 @@
             pictureBoxChair = new PictureBox();
             lblChairEmployee = new Label();
             lblChairName = new Label();
-            btnChairSave = new Button();
+            btnChairAdd = new Button();
             comboBoxChairEmployee = new ComboBox();
             txtChairName = new TextBox();
             dataGridViewChair = new DataGridView();
             tabPageCategories = new TabPage();
+            btnCategoryAdd = new Button();
             btnCategoryDelete = new Button();
             btnCategoryUpdate = new Button();
             pictureBoxCategory = new PictureBox();
@@ -78,19 +79,18 @@
             txtCategoryName = new TextBox();
             dataGridViewCategory = new DataGridView();
             tabPageProducts = new TabPage();
+            lblProductPrice = new Label();
+            lblProductName = new Label();
+            lblProductCategory = new Label();
             btnProductDelete = new Button();
             btnProductUpdate = new Button();
             pictureBoxProduct = new PictureBox();
-            btnProductSave = new Button();
+            btnProductAdd = new Button();
             comboBoxProductCategory = new ComboBox();
             txtProductPrice = new TextBox();
             txtProductName = new TextBox();
             dataGridViewProduct = new DataGridView();
             btnBack = new Button();
-            btnCategorySave = new Button();
-            lblProductCategory = new Label();
-            lblProductName = new Label();
-            lblProductPrice = new Label();
             tabControl1.SuspendLayout();
             tabPageSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
@@ -151,11 +151,11 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Trebuchet MS", 11F, FontStyle.Bold);
             btnSave.ImageAlign = ContentAlignment.TopCenter;
-            btnSave.ImageKey = "btnUpdate.png";
+            btnSave.ImageKey = "save.png";
             btnSave.ImageList = ımageListButtons;
-            btnSave.Location = new Point(492, 442);
+            btnSave.Location = new Point(492, 452);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(80, 95);
+            btnSave.Size = new Size(80, 74);
             btnSave.TabIndex = 10;
             btnSave.Text = "Kaydet";
             btnSave.TextAlign = ContentAlignment.BottomCenter;
@@ -171,6 +171,7 @@
             ımageListButtons.Images.SetKeyName(1, "btnDelete.png");
             ımageListButtons.Images.SetKeyName(2, "btnUpdate.png");
             ımageListButtons.Images.SetKeyName(3, "btnHome.png");
+            ımageListButtons.Images.SetKeyName(4, "save.png");
             // 
             // lblTitle
             // 
@@ -280,7 +281,7 @@
             tabPageEmployee.Controls.Add(lblEmployeeType);
             tabPageEmployee.Controls.Add(lblEmployeeEmail);
             tabPageEmployee.Controls.Add(lblEmployeeName);
-            tabPageEmployee.Controls.Add(btnEmployeeSave);
+            tabPageEmployee.Controls.Add(btnEmployeeAdd);
             tabPageEmployee.Controls.Add(comboBoxEmployeeType);
             tabPageEmployee.Controls.Add(txtEmployeePhone);
             tabPageEmployee.Controls.Add(txtEmployeePassword);
@@ -393,24 +394,24 @@
             lblEmployeeName.TabIndex = 28;
             lblEmployeeName.Text = "Ad Soyad";
             // 
-            // btnEmployeeSave
+            // btnEmployeeAdd
             // 
-            btnEmployeeSave.BackColor = SystemColors.Control;
-            btnEmployeeSave.FlatAppearance.BorderSize = 0;
-            btnEmployeeSave.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnEmployeeSave.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnEmployeeSave.FlatStyle = FlatStyle.Flat;
-            btnEmployeeSave.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEmployeeSave.ImageAlign = ContentAlignment.TopCenter;
-            btnEmployeeSave.ImageKey = "btnAdd.png";
-            btnEmployeeSave.ImageList = ımageListButtons;
-            btnEmployeeSave.Location = new Point(34, 474);
-            btnEmployeeSave.Name = "btnEmployeeSave";
-            btnEmployeeSave.Size = new Size(60, 67);
-            btnEmployeeSave.TabIndex = 27;
-            btnEmployeeSave.Text = "Kaydet";
-            btnEmployeeSave.TextAlign = ContentAlignment.BottomCenter;
-            btnEmployeeSave.UseVisualStyleBackColor = false;
+            btnEmployeeAdd.BackColor = SystemColors.Control;
+            btnEmployeeAdd.FlatAppearance.BorderSize = 0;
+            btnEmployeeAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnEmployeeAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnEmployeeAdd.FlatStyle = FlatStyle.Flat;
+            btnEmployeeAdd.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEmployeeAdd.ImageAlign = ContentAlignment.TopCenter;
+            btnEmployeeAdd.ImageKey = "btnAdd.png";
+            btnEmployeeAdd.ImageList = ımageListButtons;
+            btnEmployeeAdd.Location = new Point(34, 474);
+            btnEmployeeAdd.Name = "btnEmployeeAdd";
+            btnEmployeeAdd.Size = new Size(60, 67);
+            btnEmployeeAdd.TabIndex = 27;
+            btnEmployeeAdd.Text = "Ekle";
+            btnEmployeeAdd.TextAlign = ContentAlignment.BottomCenter;
+            btnEmployeeAdd.UseVisualStyleBackColor = false;
             // 
             // comboBoxEmployeeType
             // 
@@ -475,7 +476,7 @@
             tabPageChairs.Controls.Add(pictureBoxChair);
             tabPageChairs.Controls.Add(lblChairEmployee);
             tabPageChairs.Controls.Add(lblChairName);
-            tabPageChairs.Controls.Add(btnChairSave);
+            tabPageChairs.Controls.Add(btnChairAdd);
             tabPageChairs.Controls.Add(comboBoxChairEmployee);
             tabPageChairs.Controls.Add(txtChairName);
             tabPageChairs.Controls.Add(dataGridViewChair);
@@ -555,27 +556,28 @@
             lblChairName.TabIndex = 28;
             lblChairName.Text = "Ad";
             // 
-            // btnChairSave
+            // btnChairAdd
             // 
-            btnChairSave.BackColor = SystemColors.Control;
-            btnChairSave.FlatAppearance.BorderSize = 0;
-            btnChairSave.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnChairSave.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnChairSave.FlatStyle = FlatStyle.Flat;
-            btnChairSave.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnChairSave.ImageAlign = ContentAlignment.TopCenter;
-            btnChairSave.ImageKey = "btnAdd.png";
-            btnChairSave.ImageList = ımageListButtons;
-            btnChairSave.Location = new Point(25, 380);
-            btnChairSave.Name = "btnChairSave";
-            btnChairSave.Size = new Size(60, 67);
-            btnChairSave.TabIndex = 27;
-            btnChairSave.Text = "Kaydet";
-            btnChairSave.TextAlign = ContentAlignment.BottomCenter;
-            btnChairSave.UseVisualStyleBackColor = false;
+            btnChairAdd.BackColor = SystemColors.Control;
+            btnChairAdd.FlatAppearance.BorderSize = 0;
+            btnChairAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnChairAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnChairAdd.FlatStyle = FlatStyle.Flat;
+            btnChairAdd.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChairAdd.ImageAlign = ContentAlignment.TopCenter;
+            btnChairAdd.ImageKey = "btnAdd.png";
+            btnChairAdd.ImageList = ımageListButtons;
+            btnChairAdd.Location = new Point(25, 380);
+            btnChairAdd.Name = "btnChairAdd";
+            btnChairAdd.Size = new Size(60, 67);
+            btnChairAdd.TabIndex = 27;
+            btnChairAdd.Text = "Ekle";
+            btnChairAdd.TextAlign = ContentAlignment.BottomCenter;
+            btnChairAdd.UseVisualStyleBackColor = false;
             // 
             // comboBoxChairEmployee
             // 
+            comboBoxChairEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxChairEmployee.Font = new Font("Segoe UI Variable Text Semibold", 11.25F, FontStyle.Bold);
             comboBoxChairEmployee.FormattingEnabled = true;
             comboBoxChairEmployee.Location = new Point(34, 306);
@@ -606,7 +608,7 @@
             // tabPageCategories
             // 
             tabPageCategories.BackColor = SystemColors.Control;
-            tabPageCategories.Controls.Add(btnCategorySave);
+            tabPageCategories.Controls.Add(btnCategoryAdd);
             tabPageCategories.Controls.Add(btnCategoryDelete);
             tabPageCategories.Controls.Add(btnCategoryUpdate);
             tabPageCategories.Controls.Add(pictureBoxCategory);
@@ -619,6 +621,25 @@
             tabPageCategories.Size = new Size(1089, 548);
             tabPageCategories.TabIndex = 3;
             tabPageCategories.Text = "Kategoriler";
+            // 
+            // btnCategoryAdd
+            // 
+            btnCategoryAdd.BackColor = SystemColors.Control;
+            btnCategoryAdd.FlatAppearance.BorderSize = 0;
+            btnCategoryAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCategoryAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnCategoryAdd.FlatStyle = FlatStyle.Flat;
+            btnCategoryAdd.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCategoryAdd.ImageAlign = ContentAlignment.TopCenter;
+            btnCategoryAdd.ImageKey = "btnAdd.png";
+            btnCategoryAdd.ImageList = ımageListButtons;
+            btnCategoryAdd.Location = new Point(27, 281);
+            btnCategoryAdd.Name = "btnCategoryAdd";
+            btnCategoryAdd.Size = new Size(70, 70);
+            btnCategoryAdd.TabIndex = 36;
+            btnCategoryAdd.Text = "Ekle";
+            btnCategoryAdd.TextAlign = ContentAlignment.BottomCenter;
+            btnCategoryAdd.UseVisualStyleBackColor = false;
             // 
             // btnCategoryDelete
             // 
@@ -708,7 +729,7 @@
             tabPageProducts.Controls.Add(btnProductDelete);
             tabPageProducts.Controls.Add(btnProductUpdate);
             tabPageProducts.Controls.Add(pictureBoxProduct);
-            tabPageProducts.Controls.Add(btnProductSave);
+            tabPageProducts.Controls.Add(btnProductAdd);
             tabPageProducts.Controls.Add(comboBoxProductCategory);
             tabPageProducts.Controls.Add(txtProductPrice);
             tabPageProducts.Controls.Add(txtProductName);
@@ -719,6 +740,36 @@
             tabPageProducts.Size = new Size(1089, 548);
             tabPageProducts.TabIndex = 4;
             tabPageProducts.Text = "Ürün/Hizmetler";
+            // 
+            // lblProductPrice
+            // 
+            lblProductPrice.AutoSize = true;
+            lblProductPrice.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            lblProductPrice.Location = new Point(34, 327);
+            lblProductPrice.Name = "lblProductPrice";
+            lblProductPrice.Size = new Size(51, 23);
+            lblProductPrice.TabIndex = 38;
+            lblProductPrice.Text = "Fiyat";
+            // 
+            // lblProductName
+            // 
+            lblProductName.AutoSize = true;
+            lblProductName.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            lblProductName.Location = new Point(34, 262);
+            lblProductName.Name = "lblProductName";
+            lblProductName.Size = new Size(32, 23);
+            lblProductName.TabIndex = 37;
+            lblProductName.Text = "Ad";
+            // 
+            // lblProductCategory
+            // 
+            lblProductCategory.AutoSize = true;
+            lblProductCategory.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            lblProductCategory.Location = new Point(34, 193);
+            lblProductCategory.Name = "lblProductCategory";
+            lblProductCategory.Size = new Size(81, 23);
+            lblProductCategory.TabIndex = 36;
+            lblProductCategory.Text = "Kategori";
             // 
             // btnProductDelete
             // 
@@ -769,27 +820,28 @@
             pictureBoxProduct.TabIndex = 33;
             pictureBoxProduct.TabStop = false;
             // 
-            // btnProductSave
+            // btnProductAdd
             // 
-            btnProductSave.BackColor = SystemColors.Control;
-            btnProductSave.FlatAppearance.BorderSize = 0;
-            btnProductSave.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnProductSave.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnProductSave.FlatStyle = FlatStyle.Flat;
-            btnProductSave.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnProductSave.ImageAlign = ContentAlignment.TopCenter;
-            btnProductSave.ImageKey = "btnAdd.png";
-            btnProductSave.ImageList = ımageListButtons;
-            btnProductSave.Location = new Point(25, 404);
-            btnProductSave.Name = "btnProductSave";
-            btnProductSave.Size = new Size(60, 67);
-            btnProductSave.TabIndex = 27;
-            btnProductSave.Text = "Kaydet";
-            btnProductSave.TextAlign = ContentAlignment.BottomCenter;
-            btnProductSave.UseVisualStyleBackColor = false;
+            btnProductAdd.BackColor = SystemColors.Control;
+            btnProductAdd.FlatAppearance.BorderSize = 0;
+            btnProductAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnProductAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnProductAdd.FlatStyle = FlatStyle.Flat;
+            btnProductAdd.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnProductAdd.ImageAlign = ContentAlignment.TopCenter;
+            btnProductAdd.ImageKey = "btnAdd.png";
+            btnProductAdd.ImageList = ımageListButtons;
+            btnProductAdd.Location = new Point(25, 404);
+            btnProductAdd.Name = "btnProductAdd";
+            btnProductAdd.Size = new Size(60, 67);
+            btnProductAdd.TabIndex = 27;
+            btnProductAdd.Text = "Ekle";
+            btnProductAdd.TextAlign = ContentAlignment.BottomCenter;
+            btnProductAdd.UseVisualStyleBackColor = false;
             // 
             // comboBoxProductCategory
             // 
+            comboBoxProductCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxProductCategory.Font = new Font("Segoe UI Variable Text Semibold", 11.25F, FontStyle.Bold);
             comboBoxProductCategory.FormattingEnabled = true;
             comboBoxProductCategory.Location = new Point(34, 219);
@@ -842,55 +894,6 @@
             btnBack.TabIndex = 6;
             btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
-            // 
-            // btnCategorySave
-            // 
-            btnCategorySave.BackColor = SystemColors.Control;
-            btnCategorySave.FlatAppearance.BorderSize = 0;
-            btnCategorySave.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            btnCategorySave.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnCategorySave.FlatStyle = FlatStyle.Flat;
-            btnCategorySave.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCategorySave.ImageAlign = ContentAlignment.TopCenter;
-            btnCategorySave.ImageKey = "btnAdd.png";
-            btnCategorySave.ImageList = ımageListButtons;
-            btnCategorySave.Location = new Point(27, 281);
-            btnCategorySave.Name = "btnCategorySave";
-            btnCategorySave.Size = new Size(70, 70);
-            btnCategorySave.TabIndex = 36;
-            btnCategorySave.Text = "Kaydet";
-            btnCategorySave.TextAlign = ContentAlignment.BottomCenter;
-            btnCategorySave.UseVisualStyleBackColor = false;
-            // 
-            // lblProductCategory
-            // 
-            lblProductCategory.AutoSize = true;
-            lblProductCategory.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            lblProductCategory.Location = new Point(34, 193);
-            lblProductCategory.Name = "lblProductCategory";
-            lblProductCategory.Size = new Size(81, 23);
-            lblProductCategory.TabIndex = 36;
-            lblProductCategory.Text = "Kategori";
-            // 
-            // lblProductName
-            // 
-            lblProductName.AutoSize = true;
-            lblProductName.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            lblProductName.Location = new Point(34, 262);
-            lblProductName.Name = "lblProductName";
-            lblProductName.Size = new Size(32, 23);
-            lblProductName.TabIndex = 37;
-            lblProductName.Text = "Ad";
-            // 
-            // lblProductPrice
-            // 
-            lblProductPrice.AutoSize = true;
-            lblProductPrice.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            lblProductPrice.Location = new Point(34, 327);
-            lblProductPrice.Name = "lblProductPrice";
-            lblProductPrice.Size = new Size(51, 23);
-            lblProductPrice.TabIndex = 38;
-            lblProductPrice.Text = "Fiyat";
             // 
             // Settings
             // 
@@ -956,7 +959,7 @@
         private Label lblEmployeeType;
         private Label lblEmployeeEmail;
         private Label lblEmployeeName;
-        private Button btnEmployeeSave;
+        private Button btnEmployeeAdd;
         private ComboBox comboBoxEmployeeType;
         private TextBox txtEmployeePhone;
         private TextBox txtEmployeePassword;
@@ -968,7 +971,7 @@
         private PictureBox pictureBoxChair;
         private Label lblChairEmployee;
         private Label lblChairName;
-        private Button btnChairSave;
+        private Button btnChairAdd;
         private ComboBox comboBoxChairEmployee;
         private TextBox txtChairName;
         private DataGridView dataGridViewChair;
@@ -995,14 +998,14 @@
         private Label label18;
         private Label label19;
         private Label label20;
-        private Button btnProductSave;
+        private Button btnProductAdd;
         private ComboBox comboBoxProductCategory;
         private TextBox textBox9;
         private TextBox textBox10;
         private TextBox txtProductPrice;
         private TextBox txtProductName;
         private DataGridView dataGridViewProduct;
-        private Button btnCategorySave;
+        private Button btnCategoryAdd;
         private Label lblProductPrice;
         private Label lblProductName;
         private Label lblProductCategory;
