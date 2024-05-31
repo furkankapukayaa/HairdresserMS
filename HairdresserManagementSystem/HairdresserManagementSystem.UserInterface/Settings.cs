@@ -13,6 +13,7 @@ namespace HairdresserManagementSystem.UserInterface
 
         private BaseFormObject baseFormObject = new BaseFormObject();
         private string _loggedInUserId;
+
         private void OpenHomePage()
         {
             Application.Run(new Home(_loggedInUserId));

@@ -48,6 +48,8 @@
             // 
             btnChairs.Cursor = Cursors.Hand;
             btnChairs.FlatAppearance.BorderSize = 0;
+            btnChairs.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnChairs.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnChairs.FlatStyle = FlatStyle.Flat;
             btnChairs.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
             btnChairs.ImageAlign = ContentAlignment.TopCenter;
@@ -76,6 +78,8 @@
             // 
             btnAppointments.Cursor = Cursors.Hand;
             btnAppointments.FlatAppearance.BorderSize = 0;
+            btnAppointments.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnAppointments.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnAppointments.FlatStyle = FlatStyle.Flat;
             btnAppointments.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
             btnAppointments.ImageAlign = ContentAlignment.TopCenter;
@@ -93,6 +97,8 @@
             // 
             btnOrders.Cursor = Cursors.Hand;
             btnOrders.FlatAppearance.BorderSize = 0;
+            btnOrders.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnOrders.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnOrders.FlatStyle = FlatStyle.Flat;
             btnOrders.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
             btnOrders.ImageAlign = ContentAlignment.TopCenter;
@@ -110,6 +116,8 @@
             // 
             btnCustomers.Cursor = Cursors.Hand;
             btnCustomers.FlatAppearance.BorderSize = 0;
+            btnCustomers.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCustomers.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnCustomers.FlatStyle = FlatStyle.Flat;
             btnCustomers.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
             btnCustomers.ImageAlign = ContentAlignment.TopCenter;
@@ -127,6 +135,8 @@
             // 
             btnSettings.Cursor = Cursors.Hand;
             btnSettings.FlatAppearance.BorderSize = 0;
+            btnSettings.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnSettings.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnSettings.FlatStyle = FlatStyle.Flat;
             btnSettings.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold);
             btnSettings.ImageAlign = ContentAlignment.TopCenter;
@@ -148,6 +158,8 @@
             btnLogout.BackgroundImageLayout = ImageLayout.Zoom;
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnLogout.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Location = new Point(1027, 560);
             btnLogout.Name = "btnLogout";

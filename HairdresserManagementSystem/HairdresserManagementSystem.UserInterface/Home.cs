@@ -7,35 +7,12 @@ namespace HairdresserManagementSystem.UserInterface
         public Home(string loggedInUserId)
         {
             InitializeComponent();
-            FormDesign();
+            timerCalendar.Start();
             _loggedInUserId = loggedInUserId;
         }
 
         private BaseFormObject baseFormObject = new BaseFormObject();
         private string _loggedInUserId;
-
-        public void FormDesign()
-        {
-            timerCalendar.Start();
-
-            btnChairs.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnChairs.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            btnAppointments.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnAppointments.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            btnOrders.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnOrders.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            btnCustomers.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnCustomers.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            btnSettings.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnSettings.FlatAppearance.MouseDownBackColor = Color.Transparent;
-
-            btnLogout.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            btnLogout.FlatAppearance.MouseDownBackColor = Color.Transparent;
-        }
 
         private void OpenLoginPage()
         {
@@ -58,7 +35,7 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void timerCalendar_Tick(object sender, EventArgs e)
         {
-            lblCalendar.Text = DateTime.Now.ToLongDateString() + "\n" + DateTime.Now.ToLongTimeString();
+            lblCalendar.Text = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Turkey Standard Time")).ToString("D") + "\n" + TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Turkey Standard Time")).ToString("T");
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
