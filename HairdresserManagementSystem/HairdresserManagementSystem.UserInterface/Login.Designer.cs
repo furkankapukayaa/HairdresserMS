@@ -119,10 +119,10 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Roboto Condensed Light", 24F, FontStyle.Italic, GraphicsUnit.Point, 162);
-            lblTitle.Location = new Point(569, 132);
+            lblTitle.Font = new Font("Minion Pro", 23.9999962F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(551, 128);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(365, 38);
+            lblTitle.Size = new Size(383, 44);
             lblTitle.TabIndex = 2;
             lblTitle.Text = "HairdresserMS Hoş Geldiniz!";
             // 
