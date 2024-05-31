@@ -70,6 +70,7 @@
             // 
             // btnLogin
             // 
+            btnLogin.Cursor = Cursors.Hand;
             btnLogin.Location = new Point(324, 172);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(130, 41);
@@ -138,6 +139,7 @@
             // 
             // Login
             // 
+            AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(980, 485);

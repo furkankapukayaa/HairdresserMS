@@ -50,7 +50,6 @@ namespace HairdresserManagementSystem.UserInterface
                     }
                     else
                     {
-                        MessageBox.Show("HairdresserManagementSystem'e Hoş geldiniz! Panele yönlendiriliyorsunuz!", "HairdresserManagementSystem - Hoş Geldiniz!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         loggedInUserId = passwordControl.Id;
 
                         this.Close();

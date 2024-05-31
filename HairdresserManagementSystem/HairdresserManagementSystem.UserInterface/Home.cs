@@ -26,7 +26,6 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("HairdresserMS İyi günler diler! Girişe yönlendiriliyorsunuz!", "HairdresserManagementSystem - Güle Güle", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
             baseFormObject.thread = new Thread(OpenLoginPage);
             baseFormObject.thread.SetApartmentState(ApartmentState.STA);
