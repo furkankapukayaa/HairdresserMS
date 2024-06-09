@@ -412,9 +412,11 @@
             btnEmployeeAdd.Text = "Ekle";
             btnEmployeeAdd.TextAlign = ContentAlignment.BottomCenter;
             btnEmployeeAdd.UseVisualStyleBackColor = false;
+            btnEmployeeAdd.Click += btnEmployeeAdd_Click;
             // 
             // comboBoxEmployeeType
             // 
+            comboBoxEmployeeType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEmployeeType.Font = new Font("Segoe UI Variable Text Semibold", 11.25F, FontStyle.Bold);
             comboBoxEmployeeType.FormattingEnabled = true;
             comboBoxEmployeeType.Location = new Point(34, 433);
