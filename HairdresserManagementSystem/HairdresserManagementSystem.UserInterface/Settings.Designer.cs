@@ -470,6 +470,7 @@
             dataGridViewEmployee.ReadOnly = true;
             dataGridViewEmployee.Size = new Size(749, 536);
             dataGridViewEmployee.TabIndex = 21;
+            dataGridViewEmployee.CellClick += dataGridViewEmployee_CellClick;
             // 
             // tabPageChairs
             // 

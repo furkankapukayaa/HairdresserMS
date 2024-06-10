@@ -19,10 +19,10 @@ namespace HairdresserManagementSystem.UserInterface
 
         public void DataList()
         {
-            dataGridViewEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.ToList();
-            dataGridViewChair.DataSource = baseFormObject.hairdresserMSContext.Chairs.ToList();
-            dataGridViewCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.ToList();
-            dataGridViewProduct.DataSource = baseFormObject.hairdresserMSContext.Products.ToList();
+            dataGridViewEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList();
+            dataGridViewChair.DataSource = baseFormObject.hairdresserMSContext.Chairs.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList();
+            dataGridViewCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList();
+            dataGridViewProduct.DataSource = baseFormObject.hairdresserMSContext.Products.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList();
 
             // Employee
 
@@ -158,7 +158,7 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void btnEmployeeAdd_Click(object sender, EventArgs e)
         {
-            if (txtEmployeeName.Text != string.Empty && txtEmployeeEmail.Text != string.Empty && txtEmployeePhone.Text != string.Empty && txtEmployeePassword.Text != string.Empty || comboBoxEmployeeType.SelectedIndex != -1)
+            if (txtEmployeeName.Text != string.Empty && txtEmployeeEmail.Text != string.Empty && txtEmployeePhone.Text != string.Empty && txtEmployeePassword.Text != string.Empty && comboBoxEmployeeType.SelectedIndex != -1)
             {
                 Employee newEmployee = new Employee();
                 newEmployee.NameSurname = txtEmployeeName.Text;
@@ -169,6 +169,24 @@ namespace HairdresserManagementSystem.UserInterface
 
                 baseFormObject.hairdresserMSContext.Employees.Add(newEmployee);
                 baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Yeni personel başarıyla eklendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void dataGridViewEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            if (rowIndex >= 0)
+            {
+                var employeeId = dataGridViewEmployee.Rows[rowIndex].Cells["Id"].Value.ToString();
+                var employee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == employeeId);
+                txtEmployeeName.Text = employee.NameSurname;
+                txtEmployeeEmail.Text = employee.Email;
+                txtEmployeePassword.Text = employee.Password;
+                txtEmployeePhone.Text = employee.Phone;
+                comboBoxEmployeeType.SelectedItem = employee.Type;
             }
         }
     }
