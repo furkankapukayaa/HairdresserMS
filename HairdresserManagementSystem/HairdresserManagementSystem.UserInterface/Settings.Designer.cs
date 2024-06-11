@@ -313,6 +313,7 @@
             btnEmployeeDelete.Text = "Sil";
             btnEmployeeDelete.TextAlign = ContentAlignment.BottomCenter;
             btnEmployeeDelete.UseVisualStyleBackColor = false;
+            btnEmployeeDelete.Click += btnEmployeeDelete_Click;
             // 
             // btnEmployeeUpdate
             // 
@@ -332,6 +333,7 @@
             btnEmployeeUpdate.Text = "Güncelle";
             btnEmployeeUpdate.TextAlign = ContentAlignment.BottomCenter;
             btnEmployeeUpdate.UseVisualStyleBackColor = false;
+            btnEmployeeUpdate.Click += btnEmployeeUpdate_Click;
             // 
             // pictureBoxEmployee
             // 
@@ -471,6 +473,7 @@
             dataGridViewEmployee.Size = new Size(749, 536);
             dataGridViewEmployee.TabIndex = 21;
             dataGridViewEmployee.CellClick += dataGridViewEmployee_CellClick;
+            dataGridViewEmployee.CellFormatting += dataGridViewEmployee_CellFormatting;
             // 
             // tabPageChairs
             // 

@@ -1,6 +1,7 @@
 ﻿using HairdresserManagementSystem.Entity.DomainObject;
 using HairdresserManagementSystem.Entity.Enum;
 using HairdresserManagementSystem.UserInterface.Events;
+using System.Data;
 
 namespace HairdresserManagementSystem.UserInterface
 {
@@ -32,14 +33,6 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewEmployee.Columns["UpdatedAtTime"].Visible = false;
             dataGridViewEmployee.Columns["DeletedAtTime"].Visible = false;
             dataGridViewEmployee.Columns["Status"].Visible = false;
-
-            foreach (DataGridViewRow row in dataGridViewEmployee.Rows)
-            {
-                if (!row.IsNewRow && row.Cells["Password"].Value != null)
-                {
-                    row.Cells["Password"].Value = "*****";
-                }
-            }
 
             dataGridViewEmployee.Columns["NameSurname"].HeaderText = "Ad Soyad";
             dataGridViewEmployee.Columns["Email"].HeaderText = "Mail";
@@ -78,6 +71,10 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewChair.EnableHeadersVisualStyles = false;
             dataGridViewChair.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewChair.AllowUserToResizeRows = false;
+
+            comboBoxChairEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.Where(x => x.IsDeleted == false).ToList();
+            comboBoxChairEmployee.DisplayMember = "NameSurname";
+            comboBoxChairEmployee.ValueMember = "Id";
 
             // Category
 
@@ -120,6 +117,33 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewProduct.EnableHeadersVisualStyles = false;
             dataGridViewProduct.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewProduct.AllowUserToResizeRows = false;
+
+            comboBoxProductCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.Where(x => x.IsDeleted == false).ToList();
+            comboBoxProductCategory.DisplayMember = "Name";
+            comboBoxProductCategory.ValueMember = "Id";
+
+            ClearInput();
+        }
+        public void ClearInput()
+        {
+            // Employee
+            txtEmployeeName.Clear();
+            txtEmployeeEmail.Clear();
+            txtEmployeePassword.Clear();
+            txtEmployeePhone.Clear();
+            comboBoxEmployeeType.SelectedIndex = 0;
+
+            // Chair
+            txtChairName.Clear();
+            comboBoxChairEmployee.SelectedIndex = 0;
+
+            // Category
+            txtCategoryName.Clear();
+
+            // Product
+            comboBoxProductCategory.SelectedIndex = 0;
+            txtProductName.Clear();
+            txtProductPrice.Clear();
         }
 
         private void OpenHomePage()
@@ -138,22 +162,28 @@ namespace HairdresserManagementSystem.UserInterface
         public void GetWorkplace()
         {
             var workplace = baseFormObject.hairdresserMSContext.Settings.FirstOrDefault(x => x.Id == "77c8da8c22aa4743a2435e9479fd60f4");
-            txtName.Text = workplace.WorkplaceName;
-            txtAddress.Text = workplace.WorkplaceAddress;
-            txtPhone.Text = workplace.WorkplacePhone;
-            txtAuthority.Text = workplace.WorkplaceAuthority;
+            if (workplace != null)
+            {
+                txtName.Text = workplace.WorkplaceName;
+                txtAddress.Text = workplace.WorkplaceAddress;
+                txtPhone.Text = workplace.WorkplacePhone;
+                txtAuthority.Text = workplace.WorkplaceAuthority;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             var workplace = baseFormObject.hairdresserMSContext.Settings.FirstOrDefault(x => x.Id == "77c8da8c22aa4743a2435e9479fd60f4");
-            workplace.WorkplaceName = txtName.Text;
-            workplace.WorkplaceAddress = txtAddress.Text;
-            workplace.WorkplacePhone = txtPhone.Text;
-            workplace.WorkplaceAuthority = txtAuthority.Text;
-            baseFormObject.hairdresserMSContext.Settings.Update(workplace);
-            baseFormObject.hairdresserMSContext.SaveChanges();
-            MessageBox.Show("İşyeri bilgileri başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (workplace != null)
+            {
+                workplace.WorkplaceName = txtName.Text;
+                workplace.WorkplaceAddress = txtAddress.Text;
+                workplace.WorkplacePhone = txtPhone.Text;
+                workplace.WorkplaceAuthority = txtAuthority.Text;
+                baseFormObject.hairdresserMSContext.Settings.Update(workplace);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("İşyeri bilgileri başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnEmployeeAdd_Click(object sender, EventArgs e)
@@ -174,6 +204,7 @@ namespace HairdresserManagementSystem.UserInterface
             }
         }
 
+        private string selectedEmployeeId;
         private void dataGridViewEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
@@ -181,12 +212,55 @@ namespace HairdresserManagementSystem.UserInterface
             if (rowIndex >= 0)
             {
                 var employeeId = dataGridViewEmployee.Rows[rowIndex].Cells["Id"].Value.ToString();
+                selectedEmployeeId = employeeId;
                 var employee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == employeeId);
-                txtEmployeeName.Text = employee.NameSurname;
-                txtEmployeeEmail.Text = employee.Email;
-                txtEmployeePassword.Text = employee.Password;
-                txtEmployeePhone.Text = employee.Phone;
-                comboBoxEmployeeType.SelectedItem = employee.Type;
+
+                if (employee != null)
+                {
+                    txtEmployeeName.Text = employee.NameSurname;
+                    txtEmployeeEmail.Text = employee.Email;
+                    txtEmployeePassword.Text = employee.Password;
+                    txtEmployeePhone.Text = employee.Phone;
+                    comboBoxEmployeeType.SelectedItem = employee.Type;
+                }
+            }
+        }
+
+        private void dataGridViewEmployee_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewEmployee.Columns[e.ColumnIndex].Name == "Password" && e.Value != null)
+            {
+                e.Value = new string('*', 5);
+            }
+        }
+
+        private void btnEmployeeUpdate_Click(object sender, EventArgs e)
+        {
+            var selectedEmployee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == selectedEmployeeId);
+            if (selectedEmployee != null)
+            {
+                selectedEmployee.NameSurname = txtEmployeeName.Text;
+                selectedEmployee.Email = txtEmployeeEmail.Text;
+                selectedEmployee.Password = txtEmployeePassword.Text;
+                selectedEmployee.Phone = txtEmployeePhone.Text;
+                selectedEmployee.Type = (EmployeeType)comboBoxEmployeeType.SelectedItem;
+                baseFormObject.hairdresserMSContext.Employees.Update(selectedEmployee);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Personel başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnEmployeeDelete_Click(object sender, EventArgs e)
+        {
+            var selectedEmployee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == selectedEmployeeId);
+            if (selectedEmployee != null)
+            {
+                selectedEmployee.IsDeleted = true;
+                baseFormObject.hairdresserMSContext.Employees.Update(selectedEmployee);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Personel başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
             }
         }
     }
