@@ -18,7 +18,7 @@ namespace HairdresserManagementSystem.UserInterface.Events
                     Email = "admin@hairdresserms",
                     Password = "a",
                     Phone = "+905555555555",
-                    Type = EmployeeType.Manager
+                    Type = EmployeeType.Yönetici
                 };
 
                 hairdresserMSContext.Employees.Add(employee);
@@ -30,7 +30,7 @@ namespace HairdresserManagementSystem.UserInterface.Events
                 employeeControl.Email = "admin@hairdresserms";
                 employeeControl.Password = "a";
                 employeeControl.Phone = "+905555555555";
-                employeeControl.Type = EmployeeType.Manager;
+                employeeControl.Type = EmployeeType.Yönetici;
                 employeeControl.IsDeleted = false;
                 employeeControl.Status = true;
                 hairdresserMSContext.SaveChanges();

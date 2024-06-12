@@ -511,6 +511,7 @@
             btnChairDelete.Text = "Sil";
             btnChairDelete.TextAlign = ContentAlignment.BottomCenter;
             btnChairDelete.UseVisualStyleBackColor = false;
+            btnChairDelete.Click += btnChairDelete_Click;
             // 
             // btnChairUpdate
             // 
@@ -530,6 +531,7 @@
             btnChairUpdate.Text = "Güncelle";
             btnChairUpdate.TextAlign = ContentAlignment.BottomCenter;
             btnChairUpdate.UseVisualStyleBackColor = false;
+            btnChairUpdate.Click += btnChairUpdate_Click;
             // 
             // pictureBoxChair
             // 
@@ -580,6 +582,7 @@
             btnChairAdd.Text = "Ekle";
             btnChairAdd.TextAlign = ContentAlignment.BottomCenter;
             btnChairAdd.UseVisualStyleBackColor = false;
+            btnChairAdd.Click += btnChairAdd_Click;
             // 
             // comboBoxChairEmployee
             // 
@@ -610,6 +613,8 @@
             dataGridViewChair.ReadOnly = true;
             dataGridViewChair.Size = new Size(749, 536);
             dataGridViewChair.TabIndex = 21;
+            dataGridViewChair.CellClick += dataGridViewChair_CellClick;
+            dataGridViewChair.CellFormatting += dataGridViewChair_CellFormatting;
             // 
             // tabPageCategories
             // 
@@ -646,6 +651,7 @@
             btnCategoryAdd.Text = "Ekle";
             btnCategoryAdd.TextAlign = ContentAlignment.BottomCenter;
             btnCategoryAdd.UseVisualStyleBackColor = false;
+            btnCategoryAdd.Click += btnCategoryAdd_Click;
             // 
             // btnCategoryDelete
             // 
@@ -665,6 +671,7 @@
             btnCategoryDelete.Text = "Sil";
             btnCategoryDelete.TextAlign = ContentAlignment.BottomCenter;
             btnCategoryDelete.UseVisualStyleBackColor = false;
+            btnCategoryDelete.Click += btnCategoryDelete_Click;
             // 
             // btnCategoryUpdate
             // 
@@ -684,6 +691,7 @@
             btnCategoryUpdate.Text = "Güncelle";
             btnCategoryUpdate.TextAlign = ContentAlignment.BottomCenter;
             btnCategoryUpdate.UseVisualStyleBackColor = false;
+            btnCategoryUpdate.Click += btnCategoryUpdate_Click;
             // 
             // pictureBoxCategory
             // 
@@ -725,6 +733,7 @@
             dataGridViewCategory.ReadOnly = true;
             dataGridViewCategory.Size = new Size(749, 536);
             dataGridViewCategory.TabIndex = 21;
+            dataGridViewCategory.CellClick += dataGridViewCategory_CellClick;
             // 
             // tabPageProducts
             // 
@@ -795,6 +804,7 @@
             btnProductDelete.Text = "Sil";
             btnProductDelete.TextAlign = ContentAlignment.BottomCenter;
             btnProductDelete.UseVisualStyleBackColor = false;
+            btnProductDelete.Click += btnProductDelete_Click;
             // 
             // btnProductUpdate
             // 
@@ -814,6 +824,7 @@
             btnProductUpdate.Text = "Güncelle";
             btnProductUpdate.TextAlign = ContentAlignment.BottomCenter;
             btnProductUpdate.UseVisualStyleBackColor = false;
+            btnProductUpdate.Click += btnProductUpdate_Click;
             // 
             // pictureBoxProduct
             // 
@@ -844,6 +855,7 @@
             btnProductAdd.Text = "Ekle";
             btnProductAdd.TextAlign = ContentAlignment.BottomCenter;
             btnProductAdd.UseVisualStyleBackColor = false;
+            btnProductAdd.Click += btnProductAdd_Click;
             // 
             // comboBoxProductCategory
             // 
@@ -883,6 +895,8 @@
             dataGridViewProduct.ReadOnly = true;
             dataGridViewProduct.Size = new Size(749, 536);
             dataGridViewProduct.TabIndex = 21;
+            dataGridViewProduct.CellClick += dataGridViewProduct_CellClick;
+            dataGridViewProduct.CellFormatting += dataGridViewProduct_CellFormatting;
             // 
             // btnBack
             // 

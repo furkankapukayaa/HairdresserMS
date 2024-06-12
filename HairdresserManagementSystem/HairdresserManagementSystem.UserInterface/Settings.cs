@@ -72,7 +72,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewChair.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewChair.AllowUserToResizeRows = false;
 
-            comboBoxChairEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.Where(x => x.IsDeleted == false).ToList();
+            comboBoxChairEmployee.DataSource = baseFormObject.hairdresserMSContext.Employees.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList();
             comboBoxChairEmployee.DisplayMember = "NameSurname";
             comboBoxChairEmployee.ValueMember = "Id";
 
@@ -118,7 +118,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewProduct.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewProduct.AllowUserToResizeRows = false;
 
-            comboBoxProductCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.Where(x => x.IsDeleted == false).ToList();
+            comboBoxProductCategory.DataSource = baseFormObject.hairdresserMSContext.Categories.Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedAtTime).ToList(); ;
             comboBoxProductCategory.DisplayMember = "Name";
             comboBoxProductCategory.ValueMember = "Id";
 
@@ -261,6 +261,219 @@ namespace HairdresserManagementSystem.UserInterface
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Personel başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataList();
+            }
+        }
+
+        private void btnChairAdd_Click(object sender, EventArgs e)
+        {
+            if (txtChairName.Text != string.Empty && comboBoxChairEmployee.SelectedIndex != -1)
+            {
+                var selectedEmployeeId = comboBoxChairEmployee.SelectedValue.ToString();
+                var selectedEmployee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == selectedEmployeeId);
+
+                Chair newChair = new Chair();
+                newChair.Name = txtChairName.Text;
+                newChair.Employee = selectedEmployee;
+
+                baseFormObject.hairdresserMSContext.Chairs.Add(newChair);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Yeni Koltuk başarıyla eklendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void dataGridViewChair_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewChair.Columns[e.ColumnIndex].Name == "Employee" && e.Value != null)
+            {
+                var employee = (Employee)e.Value;
+                e.Value = employee?.NameSurname ?? "Yok";
+            }
+        }
+
+        private string selectedChairId;
+        private void dataGridViewChair_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            if (rowIndex >= 0)
+            {
+                var chairId = dataGridViewChair.Rows[rowIndex].Cells["Id"].Value.ToString();
+                selectedChairId = chairId;
+                var chair = baseFormObject.hairdresserMSContext.Chairs.FirstOrDefault(x => x.Id == chairId);
+
+                if (chair != null)
+                {
+                    txtChairName.Text = chair.Name;
+                    comboBoxChairEmployee.SelectedItem = chair.Employee;
+                }
+            }
+        }
+
+        private void btnChairUpdate_Click(object sender, EventArgs e)
+        {
+            var selectedChair = baseFormObject.hairdresserMSContext.Chairs.FirstOrDefault(x => x.Id == selectedChairId);
+            var selectedEmployee = baseFormObject.hairdresserMSContext.Employees.FirstOrDefault(x => x.Id == comboBoxChairEmployee.SelectedValue);
+
+            if (selectedChair != null)
+            {
+                selectedChair.Name = txtChairName.Text;
+                selectedChair.Employee = selectedEmployee;
+                baseFormObject.hairdresserMSContext.Chairs.Update(selectedChair);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Koltuk başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnChairDelete_Click(object sender, EventArgs e)
+        {
+            var selectedChair = baseFormObject.hairdresserMSContext.Chairs.FirstOrDefault(x => x.Id == selectedChairId);
+            if (selectedChair != null)
+            {
+                selectedChair.IsDeleted = true;
+                baseFormObject.hairdresserMSContext.Chairs.Update(selectedChair);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Koltuk başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private string selectedCategoryId;
+        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            if (rowIndex >= 0)
+            {
+                var categoryId = dataGridViewCategory.Rows[rowIndex].Cells["Id"].Value.ToString();
+                selectedCategoryId = categoryId;
+                var category = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == categoryId);
+
+                if (category != null)
+                {
+                    txtCategoryName.Text = category.Name;
+                }
+            }
+        }
+
+        private void btnCategoryAdd_Click(object sender, EventArgs e)
+        {
+            if (txtCategoryName.Text != string.Empty)
+            {
+                Category newCategory = new Category();
+                newCategory.Name = txtCategoryName.Text;
+
+                baseFormObject.hairdresserMSContext.Categories.Add(newCategory);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Yeni Kategori başarıyla eklendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnCategoryUpdate_Click(object sender, EventArgs e)
+        {
+            var selectedCategory = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == selectedCategoryId);
+
+            if (selectedCategory != null)
+            {
+                selectedCategory.Name = txtCategoryName.Text;
+                baseFormObject.hairdresserMSContext.Categories.Update(selectedCategory);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Kategori başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnCategoryDelete_Click(object sender, EventArgs e)
+        {
+            var selectedCategory = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == selectedCategoryId);
+            if (selectedCategory != null)
+            {
+                selectedCategory.IsDeleted = true;
+                baseFormObject.hairdresserMSContext.Categories.Update(selectedCategory);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Kategori başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private string selectedProductId;
+
+        private void dataGridViewProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            if (rowIndex >= 0)
+            {
+                var productId = dataGridViewProduct.Rows[rowIndex].Cells["Id"].Value.ToString();
+                selectedProductId = productId;
+                var product = baseFormObject.hairdresserMSContext.Products.FirstOrDefault(x => x.Id == productId);
+
+                if (product != null)
+                {
+                    comboBoxProductCategory.SelectedItem = product.Category;
+                    txtProductName.Text = product.Name;
+                    txtProductPrice.Text = product.Price;
+                }
+            }
+        }
+
+        private void btnProductAdd_Click(object sender, EventArgs e)
+        {
+            if (txtProductName.Text != string.Empty && txtProductPrice.Text != string.Empty && comboBoxProductCategory.SelectedIndex != -1)
+            {
+                var selectedCategory = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == comboBoxProductCategory.SelectedValue);
+
+                Product newProduct = new Product();
+                newProduct.Category = selectedCategory;
+                newProduct.Name = txtProductName.Text;
+                newProduct.Price = txtProductPrice.Text;
+
+                baseFormObject.hairdresserMSContext.Products.Add(newProduct);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Yeni Ürün başarıyla eklendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnProductUpdate_Click(object sender, EventArgs e)
+        {
+            var selectedProduct = baseFormObject.hairdresserMSContext.Products.FirstOrDefault(x => x.Id == selectedProductId);
+            var selectedCategory = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == comboBoxProductCategory.SelectedValue);
+
+            if (selectedProduct != null)
+            {
+                selectedProduct.Category = selectedCategory;
+                selectedProduct.Name = txtProductName.Text;
+                selectedProduct.Price = txtProductPrice.Text;
+
+                baseFormObject.hairdresserMSContext.Products.Update(selectedProduct);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Ürün başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void btnProductDelete_Click(object sender, EventArgs e)
+        {
+            var selectedProduct = baseFormObject.hairdresserMSContext.Products.FirstOrDefault(x => x.Id == selectedProductId);
+            if (selectedProduct != null)
+            {
+                selectedProduct.IsDeleted = true;
+                baseFormObject.hairdresserMSContext.Products.Update(selectedProduct);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Ürün başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void dataGridViewProduct_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewProduct.Columns[e.ColumnIndex].Name == "Category" && e.Value != null)
+            {
+                var category = (Category)e.Value;
+                e.Value = category?.Name ?? "Yok";
             }
         }
     }
