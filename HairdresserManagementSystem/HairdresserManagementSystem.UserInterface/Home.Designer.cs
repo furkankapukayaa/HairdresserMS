@@ -62,6 +62,7 @@
             btnChairs.Text = "Koltuklar";
             btnChairs.TextAlign = ContentAlignment.BottomCenter;
             btnChairs.UseVisualStyleBackColor = false;
+            btnChairs.Click += btnChairs_Click;
             // 
             // imageListButtons
             // 

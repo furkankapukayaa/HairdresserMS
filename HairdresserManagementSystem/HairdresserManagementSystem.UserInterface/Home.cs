@@ -23,6 +23,10 @@ namespace HairdresserManagementSystem.UserInterface
         {
             Application.Run(new Settings(_loggedInUserId));
         }
+        private void OpenChairsPage()
+        {
+            Application.Run(new Chairs(_loggedInUserId));
+        }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -41,6 +45,14 @@ namespace HairdresserManagementSystem.UserInterface
         {
             this.Close();
             baseFormObject.thread = new Thread(OpenSettingsPage);
+            baseFormObject.thread.SetApartmentState(ApartmentState.STA);
+            baseFormObject.thread.Start();
+        }
+
+        private void btnChairs_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            baseFormObject.thread = new Thread(OpenChairsPage);
             baseFormObject.thread.SetApartmentState(ApartmentState.STA);
             baseFormObject.thread.Start();
         }
