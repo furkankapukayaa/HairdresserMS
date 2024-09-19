@@ -93,6 +93,7 @@
             btnAppointments.Text = "Randevular";
             btnAppointments.TextAlign = ContentAlignment.BottomCenter;
             btnAppointments.UseVisualStyleBackColor = false;
+            btnAppointments.Click += btnAppointments_Click;
             // 
             // btnOrders
             // 
@@ -112,6 +113,7 @@
             btnOrders.Text = "Kasa";
             btnOrders.TextAlign = ContentAlignment.BottomCenter;
             btnOrders.UseVisualStyleBackColor = false;
+            btnOrders.Click += btnOrders_Click;
             // 
             // btnCustomers
             // 

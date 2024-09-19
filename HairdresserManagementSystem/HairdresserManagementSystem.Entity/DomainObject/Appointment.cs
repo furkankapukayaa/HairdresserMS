@@ -3,7 +3,7 @@
     public class Appointment : BaseDomainObject
     {
         public Employee Employee { get; set; }
-        public string CustomerName { get; set; }
+        public Customer Customer { get; set; }
         public string Notes { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
