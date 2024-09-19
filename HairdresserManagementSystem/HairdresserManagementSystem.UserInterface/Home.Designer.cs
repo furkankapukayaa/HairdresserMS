@@ -131,6 +131,7 @@
             btnCustomers.Text = "Müşteriler";
             btnCustomers.TextAlign = ContentAlignment.BottomCenter;
             btnCustomers.UseVisualStyleBackColor = false;
+            btnCustomers.Click += btnCustomers_Click;
             // 
             // btnSettings
             // 

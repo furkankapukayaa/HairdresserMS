@@ -180,6 +180,7 @@ namespace HairdresserManagementSystem.UserInterface
                 workplace.WorkplaceAddress = txtAddress.Text;
                 workplace.WorkplacePhone = txtPhone.Text;
                 workplace.WorkplaceAuthority = txtAuthority.Text;
+                workplace.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Settings.Update(workplace);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("İşyeri bilgileri başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -244,6 +245,7 @@ namespace HairdresserManagementSystem.UserInterface
                 selectedEmployee.Password = txtEmployeePassword.Text;
                 selectedEmployee.Phone = txtEmployeePhone.Text;
                 selectedEmployee.Type = (EmployeeType)comboBoxEmployeeType.SelectedItem;
+                selectedEmployee.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Employees.Update(selectedEmployee);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Personel başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -257,6 +259,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedEmployee != null)
             {
                 selectedEmployee.IsDeleted = true;
+                selectedEmployee.DeletedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Employees.Update(selectedEmployee);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Personel başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -319,6 +322,7 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 selectedChair.Name = txtChairName.Text;
                 selectedChair.Employee = selectedEmployee;
+                selectedChair.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Chairs.Update(selectedChair);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Koltuk başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -332,6 +336,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedChair != null)
             {
                 selectedChair.IsDeleted = true;
+                selectedChair.DeletedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Chairs.Update(selectedChair);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Koltuk başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -378,6 +383,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedCategory != null)
             {
                 selectedCategory.Name = txtCategoryName.Text;
+                selectedCategory.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Categories.Update(selectedCategory);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Kategori başarıyla güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -391,6 +397,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedCategory != null)
             {
                 selectedCategory.IsDeleted = true;
+                selectedCategory.DeletedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Categories.Update(selectedCategory);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Kategori başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -447,6 +454,7 @@ namespace HairdresserManagementSystem.UserInterface
                 selectedProduct.Category = selectedCategory;
                 selectedProduct.Name = txtProductName.Text;
                 selectedProduct.Price = txtProductPrice.Text;
+                selectedProduct.UpdatedAtTime = DateTime.Now;
 
                 baseFormObject.hairdresserMSContext.Products.Update(selectedProduct);
                 baseFormObject.hairdresserMSContext.SaveChanges();
@@ -461,6 +469,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedProduct != null)
             {
                 selectedProduct.IsDeleted = true;
+                selectedProduct.DeletedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Products.Update(selectedProduct);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Ürün başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);

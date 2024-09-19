@@ -28,6 +28,11 @@ namespace HairdresserManagementSystem.UserInterface
             Application.Run(new Chairs(_loggedInUserId));
         }
 
+        private void OpenCustomersPage()
+        {
+            Application.Run(new Customer(_loggedInUserId));
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -53,6 +58,14 @@ namespace HairdresserManagementSystem.UserInterface
         {
             this.Close();
             baseFormObject.thread = new Thread(OpenChairsPage);
+            baseFormObject.thread.SetApartmentState(ApartmentState.STA);
+            baseFormObject.thread.Start();
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            baseFormObject.thread = new Thread(OpenCustomersPage);
             baseFormObject.thread.SetApartmentState(ApartmentState.STA);
             baseFormObject.thread.Start();
         }
