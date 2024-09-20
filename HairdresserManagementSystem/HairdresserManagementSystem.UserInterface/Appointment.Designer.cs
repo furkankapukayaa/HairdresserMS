@@ -55,6 +55,7 @@
             btnAppointmentCancel = new Button();
             dataGridViewAppointment = new DataGridView();
             btnBack = new Button();
+            button1 = new Button();
             tabControl1.SuspendLayout();
             tabPageAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxEmployee).BeginInit();
@@ -130,6 +131,7 @@
             ımageListButtons.Images.SetKeyName(3, "btnHome.png");
             ımageListButtons.Images.SetKeyName(4, "save.png");
             ımageListButtons.Images.SetKeyName(5, "btnCancel.png");
+            ımageListButtons.Images.SetKeyName(6, "btnConfirm.png");
             // 
             // label2
             // 
@@ -294,6 +296,7 @@
             // tabPageList
             // 
             tabPageList.BackColor = SystemColors.Control;
+            tabPageList.Controls.Add(button1);
             tabPageList.Controls.Add(btnAppointmentDelete);
             tabPageList.Controls.Add(btnAppointmentCancel);
             tabPageList.Controls.Add(dataGridViewAppointment);
@@ -315,7 +318,7 @@
             btnAppointmentDelete.ImageAlign = ContentAlignment.MiddleLeft;
             btnAppointmentDelete.ImageKey = "btnDelete.png";
             btnAppointmentDelete.ImageList = ımageListButtons;
-            btnAppointmentDelete.Location = new Point(559, 500);
+            btnAppointmentDelete.Location = new Point(683, 499);
             btnAppointmentDelete.Name = "btnAppointmentDelete";
             btnAppointmentDelete.Size = new Size(152, 46);
             btnAppointmentDelete.TabIndex = 54;
@@ -335,7 +338,7 @@
             btnAppointmentCancel.ImageAlign = ContentAlignment.MiddleLeft;
             btnAppointmentCancel.ImageKey = "btnCancel.png";
             btnAppointmentCancel.ImageList = ımageListButtons;
-            btnAppointmentCancel.Location = new Point(367, 499);
+            btnAppointmentCancel.Location = new Point(440, 499);
             btnAppointmentCancel.Name = "btnAppointmentCancel";
             btnAppointmentCancel.Size = new Size(186, 46);
             btnAppointmentCancel.TabIndex = 53;
@@ -373,6 +376,26 @@
             btnBack.TabIndex = 7;
             btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.Control;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.ImageKey = "btnConfirm.png";
+            button1.ImageList = ımageListButtons;
+            button1.Location = new Point(184, 500);
+            button1.Name = "button1";
+            button1.Size = new Size(195, 46);
+            button1.TabIndex = 55;
+            button1.Text = "Randevuyu Tamamla";
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // Appointment
             // 
@@ -422,5 +445,6 @@
         private ImageList ımageListButtons;
         private Button btnAppointmentCancel;
         private Button btnAppointmentDelete;
+        private Button button1;
     }
 }

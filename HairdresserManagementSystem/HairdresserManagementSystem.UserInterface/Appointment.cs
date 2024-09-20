@@ -1,4 +1,5 @@
 ﻿using HairdresserManagementSystem.Entity.DomainObject;
+using HairdresserManagementSystem.Entity.Enum;
 using HairdresserManagementSystem.UserInterface.Events;
 
 namespace HairdresserManagementSystem.UserInterface
@@ -51,6 +52,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewAppointment.Columns["Time"].HeaderText = "Saat";
             dataGridViewAppointment.Columns["Products"].HeaderText = "Hizmetler";
             dataGridViewAppointment.Columns["Amount"].HeaderText = "Ücret";
+            dataGridViewAppointment.Columns["AppointmentStatusType"].HeaderText = "Durum";
 
             dataGridViewAppointment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewAppointment.RowsDefaultCellStyle.BackColor = Color.White;
@@ -60,21 +62,6 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewAppointment.EnableHeadersVisualStyles = false;
             dataGridViewAppointment.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewAppointment.AllowUserToResizeRows = false;
-
-            foreach (DataGridViewRow row in dataGridViewAppointment.Rows)
-            {
-                var statusCell = row.Cells["Status"];
-                if (statusCell.Value is bool status && !status)
-                {
-                    row.DefaultCellStyle.BackColor = Color.Red;
-                }
-
-                var dateCell = row.Cells["Date"];
-                if (dateCell.Value is DateTime dateValue && dateValue < DateTime.Today)
-                {
-                    row.DefaultCellStyle.BackColor = Color.Yellow;
-                }
-            }
 
             ClearInput();
         }
@@ -146,7 +133,8 @@ namespace HairdresserManagementSystem.UserInterface
                 newAppointment.Date = dateTimePickerAppointmentDate.Value;
                 newAppointment.Time = dateTimePickerAppointmentTime.Value;
                 newAppointment.Products = listBoxAppointmentSelectedProducts.Items.Cast<Product>().ToList();
-                newAppointment.Amount = Convert.ToDouble(txtAppointmentAmount.Text);
+                newAppointment.Amount = Math.Round(Convert.ToDouble(txtAppointmentAmount.Text), 2);
+                newAppointment.AppointmentStatusType = AppointmentStatusType.Aktif;
 
                 baseFormObject.hairdresserMSContext.Appointments.Add(newAppointment);
                 baseFormObject.hairdresserMSContext.SaveChanges();
@@ -184,7 +172,7 @@ namespace HairdresserManagementSystem.UserInterface
             var selectedAppointment = baseFormObject.hairdresserMSContext.Appointments.FirstOrDefault(x => x.Id == selectedAppointmentId);
             if (selectedAppointment != null)
             {
-                selectedAppointment.Status = false;
+                selectedAppointment.AppointmentStatusType = AppointmentStatusType.İptal;
                 selectedAppointment.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Appointments.Update(selectedAppointment);
                 baseFormObject.hairdresserMSContext.SaveChanges();
@@ -211,6 +199,20 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 selectedAppointment.IsDeleted = true;
                 selectedAppointment.DeletedAtTime = DateTime.Now;
+                baseFormObject.hairdresserMSContext.Appointments.Update(selectedAppointment);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Randevu başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var selectedAppointment = baseFormObject.hairdresserMSContext.Appointments.FirstOrDefault(x => x.Id == selectedAppointmentId);
+            if (selectedAppointment != null)
+            {
+                selectedAppointment.AppointmentStatusType = AppointmentStatusType.Tamamlandı;
+                selectedAppointment.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Appointments.Update(selectedAppointment);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Randevu başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);

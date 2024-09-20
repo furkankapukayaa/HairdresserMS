@@ -1,4 +1,6 @@
-﻿namespace HairdresserManagementSystem.Entity.DomainObject
+﻿using HairdresserManagementSystem.Entity.Enum;
+
+namespace HairdresserManagementSystem.Entity.DomainObject
 {
     public class Appointment : BaseDomainObject
     {
@@ -9,5 +11,6 @@
         public DateTime Time { get; set; }
         public ICollection<Product> Products { get; set; }
         public double Amount { get; set; }
+        public AppointmentStatusType AppointmentStatusType { get; set; }
     }
 }
