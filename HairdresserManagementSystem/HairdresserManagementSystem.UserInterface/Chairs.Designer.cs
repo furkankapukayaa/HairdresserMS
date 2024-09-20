@@ -110,7 +110,7 @@
             listBoxChairSelectedProducts.Location = new Point(773, 84);
             listBoxChairSelectedProducts.Name = "listBoxChairSelectedProducts";
             listBoxChairSelectedProducts.Size = new Size(172, 364);
-            listBoxChairSelectedProducts.TabIndex = 59;
+            listBoxChairSelectedProducts.TabIndex = 57;
             // 
             // listBoxChairProducts
             // 
@@ -120,7 +120,7 @@
             listBoxChairProducts.Location = new Point(581, 84);
             listBoxChairProducts.Name = "listBoxChairProducts";
             listBoxChairProducts.Size = new Size(172, 364);
-            listBoxChairProducts.TabIndex = 58;
+            listBoxChairProducts.TabIndex = 56;
             // 
             // lblChairCustomer
             // 
@@ -140,7 +140,7 @@
             comboBoxChairCustomer.Location = new Point(271, 240);
             comboBoxChairCustomer.Name = "comboBoxChairCustomer";
             comboBoxChairCustomer.Size = new Size(237, 28);
-            comboBoxChairCustomer.TabIndex = 56;
+            comboBoxChairCustomer.TabIndex = 54;
             // 
             // lblChairEmployee
             // 
@@ -169,7 +169,7 @@
             txtChairDescription.Multiline = true;
             txtChairDescription.Name = "txtChairDescription";
             txtChairDescription.Size = new Size(248, 105);
-            txtChairDescription.TabIndex = 52;
+            txtChairDescription.TabIndex = 55;
             txtChairDescription.TextAlign = HorizontalAlignment.Center;
             // 
             // comboBoxChairEmployee
@@ -190,10 +190,11 @@
             comboBoxChairPayType.Location = new Point(913, 497);
             comboBoxChairPayType.Name = "comboBoxChairPayType";
             comboBoxChairPayType.Size = new Size(87, 28);
-            comboBoxChairPayType.TabIndex = 62;
+            comboBoxChairPayType.TabIndex = 60;
             // 
             // txtChairTotalAmount
             // 
+            txtChairTotalAmount.Enabled = false;
             txtChairTotalAmount.Font = new Font("Segoe UI Variable Text Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtChairTotalAmount.Location = new Point(553, 498);
             txtChairTotalAmount.Name = "txtChairTotalAmount";
@@ -207,7 +208,7 @@
             txtChairTip.Location = new Point(643, 498);
             txtChairTip.Name = "txtChairTip";
             txtChairTip.Size = new Size(84, 27);
-            txtChairTip.TabIndex = 64;
+            txtChairTip.TabIndex = 58;
             txtChairTip.TextAlign = HorizontalAlignment.Center;
             // 
             // txtChairDiscount
@@ -216,11 +217,12 @@
             txtChairDiscount.Location = new Point(733, 498);
             txtChairDiscount.Name = "txtChairDiscount";
             txtChairDiscount.Size = new Size(84, 27);
-            txtChairDiscount.TabIndex = 65;
+            txtChairDiscount.TabIndex = 59;
             txtChairDiscount.TextAlign = HorizontalAlignment.Center;
             // 
             // txtChairTotalAmount2
             // 
+            txtChairTotalAmount2.Enabled = false;
             txtChairTotalAmount2.Font = new Font("Segoe UI Variable Text Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtChairTotalAmount2.Location = new Point(823, 498);
             txtChairTotalAmount2.Name = "txtChairTotalAmount2";
