@@ -131,17 +131,17 @@ namespace HairdresserManagementSystem.UserInterface
             txtEmployeeEmail.Clear();
             txtEmployeePassword.Clear();
             txtEmployeePhone.Clear();
-            comboBoxEmployeeType.SelectedIndex = 0;
+            comboBoxEmployeeType.SelectedIndex = -1;
 
             // Chair
             txtChairName.Clear();
-            comboBoxChairEmployee.SelectedIndex = 0;
+            comboBoxChairEmployee.SelectedIndex = -1;
 
             // Category
             txtCategoryName.Clear();
 
             // Product
-            comboBoxProductCategory.SelectedIndex = 0;
+            comboBoxProductCategory.SelectedIndex = -1;
             txtProductName.Clear();
             txtProductPrice.Clear();
         }
@@ -421,7 +421,7 @@ namespace HairdresserManagementSystem.UserInterface
                 {
                     comboBoxProductCategory.SelectedItem = product.Category;
                     txtProductName.Text = product.Name;
-                    txtProductPrice.Text = product.Price;
+                    txtProductPrice.Text = product.Price.ToString();
                 }
             }
         }
@@ -435,7 +435,7 @@ namespace HairdresserManagementSystem.UserInterface
                 Product newProduct = new Product();
                 newProduct.Category = selectedCategory;
                 newProduct.Name = txtProductName.Text;
-                newProduct.Price = txtProductPrice.Text;
+                newProduct.Price = decimal.TryParse(txtProductPrice.Text, out var price) ? price : 0;
 
                 baseFormObject.hairdresserMSContext.Products.Add(newProduct);
                 baseFormObject.hairdresserMSContext.SaveChanges();
@@ -453,7 +453,7 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 selectedProduct.Category = selectedCategory;
                 selectedProduct.Name = txtProductName.Text;
-                selectedProduct.Price = txtProductPrice.Text;
+                selectedProduct.Price = decimal.TryParse(txtProductPrice.Text, out var price) ? price : 0; ;
                 selectedProduct.UpdatedAtTime = DateTime.Now;
 
                 baseFormObject.hairdresserMSContext.Products.Update(selectedProduct);
@@ -483,6 +483,19 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 var category = (Category)e.Value;
                 e.Value = category?.Name ?? "Yok";
+            }
+        }
+
+        private void txtProductPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != ',' && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',' || e.KeyChar == '.') && (txtProductPrice.Text.Contains(",") || txtProductPrice.Text.Contains(".")))
+            {
+                e.Handled = true;
             }
         }
     }

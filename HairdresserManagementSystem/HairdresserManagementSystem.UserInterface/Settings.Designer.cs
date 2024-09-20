@@ -875,6 +875,7 @@
             txtProductPrice.Size = new Size(237, 27);
             txtProductPrice.TabIndex = 23;
             txtProductPrice.TextAlign = HorizontalAlignment.Center;
+            txtProductPrice.KeyPress += txtProductPrice_KeyPress;
             // 
             // txtProductName
             // 
