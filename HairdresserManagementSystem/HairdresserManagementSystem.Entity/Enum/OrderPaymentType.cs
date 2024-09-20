@@ -2,7 +2,7 @@
 {
     public enum OrderPaymentType
     {
-        Cash = 1,
-        CreditCard = 2,
+        Nakit = 1,
+        Kart = 2,
     }
 }
