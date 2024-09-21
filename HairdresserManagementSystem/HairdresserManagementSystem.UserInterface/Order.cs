@@ -56,6 +56,8 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewOrder.EnableHeadersVisualStyles = false;
             dataGridViewOrder.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewOrder.AllowUserToResizeRows = false;
+
+            lblOrderTotalAmount.Text = "Toplam: " + baseFormObject.hairdresserMSContext.Orders.Where(x => x.IsDeleted == false).Sum(x => x.Amount).ToString() + " ₺";
         }
 
         private void dataGridViewOrder_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -70,6 +72,32 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 var customer = (Entity.DomainObject.Customer)e.Value;
                 e.Value = customer?.NameSurname ?? "Yok";
+            }
+        }
+
+        private string selectedOrderId;
+        private void dataGridViewOrder_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+
+            if (rowIndex >= 0)
+            {
+                var orderId = dataGridViewOrder.Rows[rowIndex].Cells["Id"].Value.ToString();
+                selectedOrderId = orderId;
+            }
+        }
+
+        private void btnCustomerDelete_Click(object sender, EventArgs e)
+        {
+            var selectedOrder = baseFormObject.hairdresserMSContext.Orders.FirstOrDefault(x => x.Id == selectedOrderId);
+            if (selectedOrder != null)
+            {
+                selectedOrder.IsDeleted = true;
+                selectedOrder.DeletedAtTime = DateTime.Now;
+                baseFormObject.hairdresserMSContext.Orders.Update(selectedOrder);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Sipariş başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
             }
         }
     }

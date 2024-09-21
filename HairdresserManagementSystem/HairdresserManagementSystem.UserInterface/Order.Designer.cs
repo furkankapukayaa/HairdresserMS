@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Order));
             btnBack = new Button();
             dataGridViewOrder = new DataGridView();
+            ımageListButtons = new ImageList(components);
+            lblOrderTotalAmount = new Label();
+            btnCustomerDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOrder).BeginInit();
             SuspendLayout();
             // 
@@ -61,13 +65,57 @@
             dataGridViewOrder.ReadOnly = true;
             dataGridViewOrder.Size = new Size(1071, 552);
             dataGridViewOrder.TabIndex = 38;
+            dataGridViewOrder.CellClick += dataGridViewOrder_CellClick;
             dataGridViewOrder.CellFormatting += dataGridViewOrder_CellFormatting;
+            // 
+            // ımageListButtons
+            // 
+            ımageListButtons.ColorDepth = ColorDepth.Depth24Bit;
+            ımageListButtons.ImageStream = (ImageListStreamer)resources.GetObject("ımageListButtons.ImageStream");
+            ımageListButtons.TransparentColor = Color.Transparent;
+            ımageListButtons.Images.SetKeyName(0, "btnAdd.png");
+            ımageListButtons.Images.SetKeyName(1, "btnDelete.png");
+            ımageListButtons.Images.SetKeyName(2, "btnUpdate.png");
+            ımageListButtons.Images.SetKeyName(3, "btnHome.png");
+            ımageListButtons.Images.SetKeyName(4, "save.png");
+            // 
+            // lblOrderTotalAmount
+            // 
+            lblOrderTotalAmount.AutoSize = true;
+            lblOrderTotalAmount.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            lblOrderTotalAmount.Location = new Point(12, 570);
+            lblOrderTotalAmount.Name = "lblOrderTotalAmount";
+            lblOrderTotalAmount.Size = new Size(110, 23);
+            lblOrderTotalAmount.TabIndex = 56;
+            lblOrderTotalAmount.Text = "yükleniyor...";
+            // 
+            // btnCustomerDelete
+            // 
+            btnCustomerDelete.BackColor = SystemColors.Control;
+            btnCustomerDelete.FlatAppearance.BorderSize = 0;
+            btnCustomerDelete.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnCustomerDelete.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnCustomerDelete.FlatStyle = FlatStyle.Flat;
+            btnCustomerDelete.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCustomerDelete.ImageAlign = ContentAlignment.MiddleRight;
+            btnCustomerDelete.ImageKey = "btnDelete.png";
+            btnCustomerDelete.ImageList = ımageListButtons;
+            btnCustomerDelete.Location = new Point(903, 567);
+            btnCustomerDelete.Name = "btnCustomerDelete";
+            btnCustomerDelete.Size = new Size(125, 54);
+            btnCustomerDelete.TabIndex = 55;
+            btnCustomerDelete.Text = "Siparişi Sil";
+            btnCustomerDelete.TextAlign = ContentAlignment.MiddleLeft;
+            btnCustomerDelete.UseVisualStyleBackColor = false;
+            btnCustomerDelete.Click += btnCustomerDelete_Click;
             // 
             // Order
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 627);
+            Controls.Add(lblOrderTotalAmount);
+            Controls.Add(btnCustomerDelete);
             Controls.Add(dataGridViewOrder);
             Controls.Add(btnBack);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
@@ -77,11 +125,15 @@
             Text = "HairdresserMS - Kasa";
             ((System.ComponentModel.ISupportInitialize)dataGridViewOrder).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnBack;
         private DataGridView dataGridViewOrder;
+        private ImageList ımageListButtons;
+        private Label lblOrderTotalAmount;
+        private Button btnCustomerDelete;
     }
 }

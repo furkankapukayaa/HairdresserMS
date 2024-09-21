@@ -241,6 +241,7 @@ namespace HairdresserManagementSystem.UserInterface
             {
                 chair.ChairStatusType = ChairStatusType.Boş;
                 chair.OrderId = string.Empty;
+                chair.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Chairs.Update(chair);
                 baseFormObject.hairdresserMSContext.SaveChanges();
                 MessageBox.Show("Koltuk hizmeti tamamlandı.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -266,6 +267,7 @@ namespace HairdresserManagementSystem.UserInterface
                 order.Discount = decimal.TryParse(txtChairDiscount.Text, out var discountAmount) ? discountAmount : 0;
                 order.Amount = decimal.TryParse(txtChairTotalAmount2.Text, out var totalAmount) ? totalAmount : 0;
                 order.PaymentType = (OrderPaymentType)comboBoxChairPayType.SelectedItem;
+                order.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Orders.Update(order);
 
                 baseFormObject.hairdresserMSContext.SaveChanges();
