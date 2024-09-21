@@ -6,7 +6,7 @@ namespace HairdresserManagementSystem.Entity.DomainObject
     {
         public string Name { get; set; }
         public Employee Employee { get; set; }
-        public ChairStatusType ChairStatusType { get; set; }
+        public ChairStatusType ChairStatusType { get; set; } = ChairStatusType.Boş;
         public string? OrderId { get; set; }
     }
 }

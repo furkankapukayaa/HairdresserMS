@@ -59,9 +59,11 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewChair.Columns["UpdatedAtTime"].Visible = false;
             dataGridViewChair.Columns["DeletedAtTime"].Visible = false;
             dataGridViewChair.Columns["Status"].Visible = false;
+            dataGridViewChair.Columns["OrderId"].Visible = false;
 
             dataGridViewChair.Columns["Name"].HeaderText = "Ad";
             dataGridViewChair.Columns["Employee"].HeaderText = "Personel";
+            dataGridViewChair.Columns["ChairStatusType"].HeaderText = "Durum";
 
             dataGridViewChair.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridViewChair.RowsDefaultCellStyle.BackColor = Color.White;
@@ -277,6 +279,7 @@ namespace HairdresserManagementSystem.UserInterface
                 Chair newChair = new Chair();
                 newChair.Name = txtChairName.Text;
                 newChair.Employee = selectedEmployee;
+                newChair.OrderId = string.Empty;
 
                 baseFormObject.hairdresserMSContext.Chairs.Add(newChair);
                 baseFormObject.hairdresserMSContext.SaveChanges();

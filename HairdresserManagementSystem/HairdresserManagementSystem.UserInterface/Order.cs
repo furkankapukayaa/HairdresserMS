@@ -73,6 +73,11 @@ namespace HairdresserManagementSystem.UserInterface
                 var customer = (Entity.DomainObject.Customer)e.Value;
                 e.Value = customer?.NameSurname ?? "Yok";
             }
+
+            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "Products" && e.Value is ICollection<Product> products)
+            {
+                e.Value = products != null ? string.Join(", ", products.Select(p => p.Name)) : "Yok";
+            }
         }
 
         private string selectedOrderId;

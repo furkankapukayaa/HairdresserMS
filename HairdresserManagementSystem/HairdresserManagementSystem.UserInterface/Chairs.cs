@@ -210,8 +210,8 @@ namespace HairdresserManagementSystem.UserInterface
 
                 Entity.DomainObject.Order newOrder = new Entity.DomainObject.Order();
                 newOrder.ChairName = chair.Name;
-                newOrder.Employee = baseFormObject.hairdresserMSContext.Employees.Find(comboBoxChairEmployee.SelectedValue.ToString());
-                newOrder.Customer = baseFormObject.hairdresserMSContext.Customers.Find(comboBoxChairCustomer.SelectedValue.ToString());
+                newOrder.Employee = comboBoxChairEmployee.SelectedItem as Employee;
+                newOrder.Customer = comboBoxChairCustomer.SelectedItem as Entity.DomainObject.Customer;
                 newOrder.Description = txtChairDescription.Text;
                 newOrder.Products = listBoxChairSelectedProducts.Items.Cast<Product>().ToList();
                 newOrder.Tip = decimal.TryParse(txtChairTip.Text, out var tipAmount) ? tipAmount : 0;
