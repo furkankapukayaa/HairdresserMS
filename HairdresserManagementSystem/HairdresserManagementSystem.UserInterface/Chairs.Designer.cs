@@ -51,6 +51,7 @@
             lblChairDiscount = new Label();
             lblChairTotalAmount2 = new Label();
             lblChairPayType = new Label();
+            lblSelectedChair = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewChair).BeginInit();
             SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             dataGridViewChair.ReadOnly = true;
             dataGridViewChair.Size = new Size(207, 603);
             dataGridViewChair.TabIndex = 37;
+            dataGridViewChair.CellClick += dataGridViewChair_CellClick;
             // 
             // lblChairSelectedProduct
             // 
@@ -111,6 +113,7 @@
             listBoxChairSelectedProducts.Name = "listBoxChairSelectedProducts";
             listBoxChairSelectedProducts.Size = new Size(172, 364);
             listBoxChairSelectedProducts.TabIndex = 57;
+            listBoxChairSelectedProducts.DoubleClick += listBoxChairSelectedProducts_DoubleClick;
             // 
             // listBoxChairProducts
             // 
@@ -121,6 +124,7 @@
             listBoxChairProducts.Name = "listBoxChairProducts";
             listBoxChairProducts.Size = new Size(172, 364);
             listBoxChairProducts.TabIndex = 56;
+            listBoxChairProducts.DoubleClick += listBoxChairProducts_DoubleClick;
             // 
             // lblChairCustomer
             // 
@@ -210,6 +214,8 @@
             txtChairTip.Size = new Size(84, 27);
             txtChairTip.TabIndex = 58;
             txtChairTip.TextAlign = HorizontalAlignment.Center;
+            txtChairTip.TextChanged += txtChairTip_TextChanged;
+            txtChairTip.KeyPress += txtChairTip_KeyPress;
             // 
             // txtChairDiscount
             // 
@@ -219,6 +225,8 @@
             txtChairDiscount.Size = new Size(84, 27);
             txtChairDiscount.TabIndex = 59;
             txtChairDiscount.TextAlign = HorizontalAlignment.Center;
+            txtChairDiscount.TextChanged += txtChairDiscount_TextChanged;
+            txtChairDiscount.KeyPress += txtChairDiscount_KeyPress;
             // 
             // txtChairTotalAmount2
             // 
@@ -280,11 +288,22 @@
             lblChairPayType.TabIndex = 71;
             lblChairPayType.Text = "Ödeme";
             // 
+            // lblSelectedChair
+            // 
+            lblSelectedChair.AutoSize = true;
+            lblSelectedChair.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            lblSelectedChair.Location = new Point(271, 58);
+            lblSelectedChair.Name = "lblSelectedChair";
+            lblSelectedChair.Size = new Size(131, 23);
+            lblSelectedChair.TabIndex = 72;
+            lblSelectedChair.Text = "Koltuk Seçiniz";
+            // 
             // Chairs
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 627);
+            Controls.Add(lblSelectedChair);
             Controls.Add(lblChairPayType);
             Controls.Add(lblChairTotalAmount2);
             Controls.Add(lblChairDiscount);
@@ -341,5 +360,6 @@
         private Label lblChairDiscount;
         private Label lblChairTotalAmount2;
         private Label lblChairPayType;
+        private Label lblSelectedChair;
     }
 }
