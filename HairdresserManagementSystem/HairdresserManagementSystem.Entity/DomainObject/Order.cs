@@ -8,9 +8,10 @@ namespace HairdresserManagementSystem.Entity.DomainObject
         public Customer Customer { get; set; }
         public string Description { get; set; }
         public ICollection<Product> Products { get; set; }
-        public double Tip { get; set; }
-        public double Discount { get; set; }
-        public double Amount { get; set; }
+        public decimal Tip { get; set; }
+        public decimal Discount { get; set; }
+        public decimal Amount { get; set; }
         public OrderPaymentType PaymentType { get; set; }
+        public string ChairName { get; set; }
     }
 }

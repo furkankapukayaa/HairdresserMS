@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Order));
             btnBack = new Button();
+            dataGridViewOrder = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOrder).BeginInit();
             SuspendLayout();
             // 
             // btnBack
@@ -49,22 +51,37 @@
             btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
             // 
+            // dataGridViewOrder
+            // 
+            dataGridViewOrder.AllowUserToAddRows = false;
+            dataGridViewOrder.AllowUserToDeleteRows = false;
+            dataGridViewOrder.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewOrder.Location = new Point(12, 12);
+            dataGridViewOrder.Name = "dataGridViewOrder";
+            dataGridViewOrder.ReadOnly = true;
+            dataGridViewOrder.Size = new Size(1071, 552);
+            dataGridViewOrder.TabIndex = 38;
+            dataGridViewOrder.CellFormatting += dataGridViewOrder_CellFormatting;
+            // 
             // Order
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 627);
+            Controls.Add(dataGridViewOrder);
             Controls.Add(btnBack);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Order";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HairdresserMS - Kasa";
+            ((System.ComponentModel.ISupportInitialize)dataGridViewOrder).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button btnBack;
+        private DataGridView dataGridViewOrder;
     }
 }

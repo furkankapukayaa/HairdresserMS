@@ -59,6 +59,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewChair.Columns["DeletedAtTime"].Visible = false;
             dataGridViewChair.Columns["Status"].Visible = false;
             dataGridViewChair.Columns["Employee"].Visible = false;
+            dataGridViewChair.Columns["OrderId"].Visible = false;
 
             dataGridViewChair.Columns["Name"].HeaderText = "#";
             dataGridViewChair.Columns["ChairStatusType"].HeaderText = "Durum";
@@ -82,6 +83,10 @@ namespace HairdresserManagementSystem.UserInterface
             comboBoxChairCustomer.SelectedIndex = -1;
             comboBoxChairPayType.SelectedIndex = -1;
             listBoxChairProducts.SelectedIndex = -1;
+            txtChairTip.Text = "0";
+            txtChairDiscount.Text = "0";
+            txtChairTotalAmount.Text = "0";
+            txtChairTotalAmount2.Text = "0";
             listBoxChairSelectedProducts.Items.Clear();
         }
 
@@ -171,6 +176,105 @@ namespace HairdresserManagementSystem.UserInterface
                 selectedChairId = chairId;
                 var chair = baseFormObject.hairdresserMSContext.Chairs.Find(chairId);
                 lblSelectedChair.Text = "İşlem Yapılan Koltuk:\n" + chair.Name;
+
+                if (chair.OrderId != string.Empty)
+                {
+                    var order = baseFormObject.hairdresserMSContext.Orders.Find(chair.OrderId);
+                    txtChairDescription.Text = order.Description;
+                    comboBoxChairEmployee.SelectedValue = order.Employee.Id;
+                    comboBoxChairCustomer.SelectedValue = order.Customer.Id;
+                    comboBoxChairPayType.SelectedItem = order.PaymentType;
+                    txtChairTip.Text = order.Tip.ToString("F2");
+                    txtChairDiscount.Text = order.Discount.ToString("F2");
+                    txtChairTotalAmount2.Text = order.Amount.ToString("F2");
+
+                    listBoxChairSelectedProducts.Items.Clear();
+                    listBoxChairSelectedProducts.Items.AddRange(order.Products.ToArray());
+                    listBoxChairSelectedProducts.DisplayMember = "Name";
+                    listBoxChairSelectedProducts.ValueMember = "Id";
+                }
+                else
+                {
+                    ClearInput();
+                }
+            }
+        }
+
+        private void btnChairOrderAdd_Click(object sender, EventArgs e)
+        {
+            var selectedChair = baseFormObject.hairdresserMSContext.Chairs.Find(selectedChairId);
+
+            if (selectedChair != null && comboBoxChairEmployee.SelectedIndex != -1 && comboBoxChairCustomer.SelectedIndex != -1 && comboBoxChairPayType.SelectedIndex != -1 && listBoxChairSelectedProducts.Items.Count > 0)
+            {
+                var chair = baseFormObject.hairdresserMSContext.Chairs.Find(selectedChairId);
+
+                Entity.DomainObject.Order newOrder = new Entity.DomainObject.Order();
+                newOrder.ChairName = chair.Name;
+                newOrder.Employee = baseFormObject.hairdresserMSContext.Employees.Find(comboBoxChairEmployee.SelectedValue.ToString());
+                newOrder.Customer = baseFormObject.hairdresserMSContext.Customers.Find(comboBoxChairCustomer.SelectedValue.ToString());
+                newOrder.Description = txtChairDescription.Text;
+                newOrder.Products = listBoxChairSelectedProducts.Items.Cast<Product>().ToList();
+                newOrder.Tip = decimal.TryParse(txtChairTip.Text, out var tipAmount) ? tipAmount : 0;
+                newOrder.Discount = decimal.TryParse(txtChairDiscount.Text, out var discountAmount) ? discountAmount : 0;
+                newOrder.Amount = decimal.TryParse(txtChairTotalAmount2.Text, out var totalAmount) ? totalAmount : 0;
+                newOrder.PaymentType = (OrderPaymentType)comboBoxChairPayType.SelectedItem;
+                baseFormObject.hairdresserMSContext.Orders.Add(newOrder);
+
+                chair.ChairStatusType = ChairStatusType.Dolu;
+                chair.OrderId = newOrder.Id;
+                baseFormObject.hairdresserMSContext.Chairs.Update(chair);
+
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Koltuk güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen tüm alanları doldurunuz.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnChairOrderConfirm_Click(object sender, EventArgs e)
+        {
+            var chair = baseFormObject.hairdresserMSContext.Chairs.Find(selectedChairId);
+            if (chair.OrderId != string.Empty)
+            {
+                chair.ChairStatusType = ChairStatusType.Boş;
+                chair.OrderId = string.Empty;
+                baseFormObject.hairdresserMSContext.Chairs.Update(chair);
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Koltuk hizmeti tamamlandı.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen dolu bir koltuk seçiniz.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnChairOrderUpdate_Click(object sender, EventArgs e)
+        {
+            var chair = baseFormObject.hairdresserMSContext.Chairs.Find(selectedChairId);
+            if (chair.OrderId != string.Empty)
+            {
+                var order = baseFormObject.hairdresserMSContext.Orders.Find(chair.OrderId);
+                order.Employee = baseFormObject.hairdresserMSContext.Employees.Find(comboBoxChairEmployee.SelectedValue.ToString());
+                order.Customer = baseFormObject.hairdresserMSContext.Customers.Find(comboBoxChairCustomer.SelectedValue.ToString());
+                order.Description = txtChairDescription.Text;
+                order.Products = listBoxChairSelectedProducts.Items.Cast<Product>().ToList();
+                order.Tip = decimal.TryParse(txtChairTip.Text, out var tipAmount) ? tipAmount : 0;
+                order.Discount = decimal.TryParse(txtChairDiscount.Text, out var discountAmount) ? discountAmount : 0;
+                order.Amount = decimal.TryParse(txtChairTotalAmount2.Text, out var totalAmount) ? totalAmount : 0;
+                order.PaymentType = (OrderPaymentType)comboBoxChairPayType.SelectedItem;
+                baseFormObject.hairdresserMSContext.Orders.Update(order);
+
+                baseFormObject.hairdresserMSContext.SaveChanges();
+                MessageBox.Show("Koltuk güncellendi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataList();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen dolu bir koltuk seçiniz.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

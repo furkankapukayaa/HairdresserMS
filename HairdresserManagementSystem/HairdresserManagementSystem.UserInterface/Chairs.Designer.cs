@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chairs));
             btnBack = new Button();
             dataGridViewChair = new DataGridView();
@@ -52,6 +53,10 @@
             lblChairTotalAmount2 = new Label();
             lblChairPayType = new Label();
             lblSelectedChair = new Label();
+            ımageListButtons = new ImageList(components);
+            btnChairOrderUpdate = new Button();
+            btnChairOrderAdd = new Button();
+            btnChairOrderConfirm = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewChair).BeginInit();
             SuspendLayout();
             // 
@@ -298,11 +303,86 @@
             lblSelectedChair.TabIndex = 72;
             lblSelectedChair.Text = "Koltuk Seçiniz";
             // 
+            // ımageListButtons
+            // 
+            ımageListButtons.ColorDepth = ColorDepth.Depth24Bit;
+            ımageListButtons.ImageStream = (ImageListStreamer)resources.GetObject("ımageListButtons.ImageStream");
+            ımageListButtons.TransparentColor = Color.Transparent;
+            ımageListButtons.Images.SetKeyName(0, "btnAdd.png");
+            ımageListButtons.Images.SetKeyName(1, "btnDelete.png");
+            ımageListButtons.Images.SetKeyName(2, "btnUpdate.png");
+            ımageListButtons.Images.SetKeyName(3, "btnHome.png");
+            ımageListButtons.Images.SetKeyName(4, "save.png");
+            ımageListButtons.Images.SetKeyName(5, "btnConfirm.png");
+            // 
+            // btnChairOrderUpdate
+            // 
+            btnChairOrderUpdate.BackColor = SystemColors.Control;
+            btnChairOrderUpdate.FlatAppearance.BorderSize = 0;
+            btnChairOrderUpdate.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnChairOrderUpdate.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnChairOrderUpdate.FlatStyle = FlatStyle.Flat;
+            btnChairOrderUpdate.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChairOrderUpdate.ImageAlign = ContentAlignment.TopCenter;
+            btnChairOrderUpdate.ImageKey = "btnUpdate.png";
+            btnChairOrderUpdate.ImageList = ımageListButtons;
+            btnChairOrderUpdate.Location = new Point(332, 456);
+            btnChairOrderUpdate.Name = "btnChairOrderUpdate";
+            btnChairOrderUpdate.Size = new Size(70, 70);
+            btnChairOrderUpdate.TabIndex = 74;
+            btnChairOrderUpdate.Text = "Güncelle";
+            btnChairOrderUpdate.TextAlign = ContentAlignment.BottomCenter;
+            btnChairOrderUpdate.UseVisualStyleBackColor = false;
+            btnChairOrderUpdate.Click += btnChairOrderUpdate_Click;
+            // 
+            // btnChairOrderAdd
+            // 
+            btnChairOrderAdd.BackColor = SystemColors.Control;
+            btnChairOrderAdd.FlatAppearance.BorderSize = 0;
+            btnChairOrderAdd.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnChairOrderAdd.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnChairOrderAdd.FlatStyle = FlatStyle.Flat;
+            btnChairOrderAdd.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChairOrderAdd.ImageAlign = ContentAlignment.TopCenter;
+            btnChairOrderAdd.ImageKey = "btnAdd.png";
+            btnChairOrderAdd.ImageList = ımageListButtons;
+            btnChairOrderAdd.Location = new Point(248, 456);
+            btnChairOrderAdd.Name = "btnChairOrderAdd";
+            btnChairOrderAdd.Size = new Size(60, 67);
+            btnChairOrderAdd.TabIndex = 73;
+            btnChairOrderAdd.Text = "Ekle";
+            btnChairOrderAdd.TextAlign = ContentAlignment.BottomCenter;
+            btnChairOrderAdd.UseVisualStyleBackColor = false;
+            btnChairOrderAdd.Click += btnChairOrderAdd_Click;
+            // 
+            // btnChairOrderConfirm
+            // 
+            btnChairOrderConfirm.BackColor = SystemColors.Control;
+            btnChairOrderConfirm.FlatAppearance.BorderSize = 0;
+            btnChairOrderConfirm.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnChairOrderConfirm.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            btnChairOrderConfirm.FlatStyle = FlatStyle.Flat;
+            btnChairOrderConfirm.Font = new Font("Microsoft YaHei", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChairOrderConfirm.ImageAlign = ContentAlignment.TopCenter;
+            btnChairOrderConfirm.ImageKey = "btnConfirm.png";
+            btnChairOrderConfirm.ImageList = ımageListButtons;
+            btnChairOrderConfirm.Location = new Point(417, 456);
+            btnChairOrderConfirm.Name = "btnChairOrderConfirm";
+            btnChairOrderConfirm.Size = new Size(102, 70);
+            btnChairOrderConfirm.TabIndex = 75;
+            btnChairOrderConfirm.Text = "Tamamlandı";
+            btnChairOrderConfirm.TextAlign = ContentAlignment.BottomCenter;
+            btnChairOrderConfirm.UseVisualStyleBackColor = false;
+            btnChairOrderConfirm.Click += btnChairOrderConfirm_Click;
+            // 
             // Chairs
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 627);
+            Controls.Add(btnChairOrderConfirm);
+            Controls.Add(btnChairOrderUpdate);
+            Controls.Add(btnChairOrderAdd);
             Controls.Add(lblSelectedChair);
             Controls.Add(lblChairPayType);
             Controls.Add(lblChairTotalAmount2);
@@ -361,5 +441,9 @@
         private Label lblChairTotalAmount2;
         private Label lblChairPayType;
         private Label lblSelectedChair;
+        private ImageList ımageListButtons;
+        private Button btnChairOrderUpdate;
+        private Button btnChairOrderAdd;
+        private Button btnChairOrderConfirm;
     }
 }
