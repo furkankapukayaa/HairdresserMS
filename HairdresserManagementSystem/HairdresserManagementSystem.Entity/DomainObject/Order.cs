@@ -4,8 +4,8 @@ namespace HairdresserManagementSystem.Entity.DomainObject
 {
     public class Order : BaseDomainObject
     {
-        public Employee Employee { get; set; }
-        public Customer Customer { get; set; }
+        public string EmployeeId { get; set; }
+        public string CustomerId { get; set; }
         public string Description { get; set; }
         public ICollection<Product> Products { get; set; }
         public decimal Tip { get; set; }

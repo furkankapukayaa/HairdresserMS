@@ -1,5 +1,4 @@
-﻿using HairdresserManagementSystem.Entity.DomainObject;
-using HairdresserManagementSystem.UserInterface.Events;
+﻿using HairdresserManagementSystem.UserInterface.Events;
 
 namespace HairdresserManagementSystem.UserInterface
 {
@@ -38,8 +37,8 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewOrder.Columns["DeletedAtTime"].Visible = false;
             dataGridViewOrder.Columns["Status"].Visible = false;
 
-            dataGridViewOrder.Columns["Employee"].HeaderText = "Personel";
-            dataGridViewOrder.Columns["Customer"].HeaderText = "Müşteri";
+            dataGridViewOrder.Columns["EmployeeId"].HeaderText = "Personel";
+            dataGridViewOrder.Columns["CustomerId"].HeaderText = "Müşteri";
             dataGridViewOrder.Columns["Description"].HeaderText = "Not";
             dataGridViewOrder.Columns["Products"].HeaderText = "Hizmetler";
             dataGridViewOrder.Columns["Tip"].HeaderText = "Bahşiş";
@@ -62,21 +61,42 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void dataGridViewOrder_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "Employee" && e.Value != null)
+            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "EmployeeId" && e.Value != null)
             {
-                var employee = (Employee)e.Value;
+                string employeeId = e.Value.ToString();
+                var employee = baseFormObject.hairdresserMSContext.Employees.Find(employeeId);
                 e.Value = employee?.NameSurname ?? "Yok";
             }
 
-            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "Customer" && e.Value != null)
+            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "CustomerId" && e.Value != null)
             {
-                var customer = (Entity.DomainObject.Customer)e.Value;
+                string customerId = e.Value.ToString();
+                var customer = baseFormObject.hairdresserMSContext.Customers.Find(customerId);
                 e.Value = customer?.NameSurname ?? "Yok";
             }
 
-            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "Products" && e.Value is ICollection<Product> products)
+            int productsColumnIndex = dataGridViewOrder.Columns["Products"].Index;
+
+            if (e.ColumnIndex == productsColumnIndex)
             {
-                e.Value = products != null ? string.Join(", ", products.Select(p => p.Name)) : "Yok";
+                var order = dataGridViewOrder.Rows[e.RowIndex].DataBoundItem as Entity.DomainObject.Order;
+
+                if (order != null)
+                {
+                    if (order.Products != null && order.Products.Any())
+                    {
+                        e.Value = string.Join(", ", order.Products.Select(p => p.Name));
+                        e.FormattingApplied = true;
+                    }
+                    else
+                    {
+                        e.Value = "Products boş";
+                    }
+                }
+                else
+                {
+                    e.Value = "Order boş";
+                }
             }
         }
 

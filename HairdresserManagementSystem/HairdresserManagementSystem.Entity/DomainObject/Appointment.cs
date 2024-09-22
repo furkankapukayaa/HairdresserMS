@@ -4,8 +4,8 @@ namespace HairdresserManagementSystem.Entity.DomainObject
 {
     public class Appointment : BaseDomainObject
     {
-        public Employee Employee { get; set; }
-        public Customer Customer { get; set; }
+        public string EmployeeId { get; set; }
+        public string CustomerId { get; set; }
         public string Notes { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }

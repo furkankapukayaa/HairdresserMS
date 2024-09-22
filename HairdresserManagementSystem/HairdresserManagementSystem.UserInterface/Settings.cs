@@ -62,7 +62,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewChair.Columns["OrderId"].Visible = false;
 
             dataGridViewChair.Columns["Name"].HeaderText = "Ad";
-            dataGridViewChair.Columns["Employee"].HeaderText = "Personel";
+            dataGridViewChair.Columns["EmployeeId"].HeaderText = "Personel";
             dataGridViewChair.Columns["ChairStatusType"].HeaderText = "Durum";
 
             dataGridViewChair.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -107,7 +107,7 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewProduct.Columns["DeletedAtTime"].Visible = false;
             dataGridViewProduct.Columns["Status"].Visible = false;
 
-            dataGridViewProduct.Columns["Category"].HeaderText = "Kategori";
+            dataGridViewProduct.Columns["CategoryId"].HeaderText = "Kategori";
             dataGridViewProduct.Columns["Name"].HeaderText = "Ad";
             dataGridViewProduct.Columns["Price"].HeaderText = "Fiyat";
 
@@ -278,7 +278,7 @@ namespace HairdresserManagementSystem.UserInterface
 
                 Chair newChair = new Chair();
                 newChair.Name = txtChairName.Text;
-                newChair.Employee = selectedEmployee;
+                newChair.EmployeeId = selectedEmployee.Id;
                 newChair.OrderId = string.Empty;
 
                 baseFormObject.hairdresserMSContext.Chairs.Add(newChair);
@@ -290,9 +290,10 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void dataGridViewChair_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridViewChair.Columns[e.ColumnIndex].Name == "Employee" && e.Value != null)
+            if (dataGridViewChair.Columns[e.ColumnIndex].Name == "EmployeeId" && e.Value != null)
             {
-                var employee = (Employee)e.Value;
+                string employeeId = e.Value.ToString();
+                var employee = baseFormObject.hairdresserMSContext.Employees.Find(employeeId);
                 e.Value = employee?.NameSurname ?? "Yok";
             }
         }
@@ -311,7 +312,7 @@ namespace HairdresserManagementSystem.UserInterface
                 if (chair != null)
                 {
                     txtChairName.Text = chair.Name;
-                    comboBoxChairEmployee.SelectedItem = chair.Employee;
+                    comboBoxChairEmployee.SelectedItem = chair.EmployeeId;
                 }
             }
         }
@@ -324,7 +325,7 @@ namespace HairdresserManagementSystem.UserInterface
             if (selectedChair != null)
             {
                 selectedChair.Name = txtChairName.Text;
-                selectedChair.Employee = selectedEmployee;
+                selectedChair.EmployeeId = selectedEmployee.Id;
                 selectedChair.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Chairs.Update(selectedChair);
                 baseFormObject.hairdresserMSContext.SaveChanges();
@@ -422,7 +423,7 @@ namespace HairdresserManagementSystem.UserInterface
 
                 if (product != null)
                 {
-                    comboBoxProductCategory.SelectedItem = product.Category;
+                    comboBoxProductCategory.SelectedItem = product.CategoryId;
                     txtProductName.Text = product.Name;
                     txtProductPrice.Text = product.Price.ToString();
                 }
@@ -436,7 +437,7 @@ namespace HairdresserManagementSystem.UserInterface
                 var selectedCategory = baseFormObject.hairdresserMSContext.Categories.FirstOrDefault(x => x.Id == comboBoxProductCategory.SelectedValue);
 
                 Product newProduct = new Product();
-                newProduct.Category = selectedCategory;
+                newProduct.CategoryId = selectedCategory.Id;
                 newProduct.Name = txtProductName.Text;
                 newProduct.Price = decimal.TryParse(txtProductPrice.Text, out var price) ? price : 0;
 
@@ -454,7 +455,7 @@ namespace HairdresserManagementSystem.UserInterface
 
             if (selectedProduct != null)
             {
-                selectedProduct.Category = selectedCategory;
+                selectedProduct.CategoryId = selectedCategory.Id;
                 selectedProduct.Name = txtProductName.Text;
                 selectedProduct.Price = decimal.TryParse(txtProductPrice.Text, out var price) ? price : 0; ;
                 selectedProduct.UpdatedAtTime = DateTime.Now;
@@ -482,9 +483,10 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void dataGridViewProduct_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridViewProduct.Columns[e.ColumnIndex].Name == "Category" && e.Value != null)
+            if (dataGridViewProduct.Columns[e.ColumnIndex].Name == "CategoryId" && e.Value != null)
             {
-                var category = (Category)e.Value;
+                string categoryId = e.Value.ToString();
+                var category = baseFormObject.hairdresserMSContext.Categories.Find(categoryId);
                 e.Value = category?.Name ?? "Yok";
             }
         }

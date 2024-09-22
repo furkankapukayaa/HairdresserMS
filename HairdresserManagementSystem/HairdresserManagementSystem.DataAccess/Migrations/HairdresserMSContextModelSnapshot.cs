@@ -37,7 +37,8 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -46,7 +47,8 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -65,10 +67,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Appointments");
                 });
@@ -117,7 +115,8 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -127,7 +126,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
@@ -137,8 +135,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Chairs");
                 });
@@ -249,7 +245,7 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DeletedAtTime")
                         .HasColumnType("datetime2");
@@ -263,7 +259,7 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
 
                     b.Property<string>("EmployeeId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -282,10 +278,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("Orders");
                 });
 
@@ -299,7 +291,7 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
 
                     b.Property<string>("CategoryId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAtTime")
                         .HasColumnType("datetime2");
@@ -329,8 +321,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppointmentId");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("OrderId");
 
@@ -378,66 +368,15 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Appointment", b =>
-                {
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Chair", b =>
-                {
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Order", b =>
-                {
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Product", b =>
                 {
                     b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Appointment", null)
                         .WithMany("Products")
                         .HasForeignKey("AppointmentId");
 
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Appointment", b =>

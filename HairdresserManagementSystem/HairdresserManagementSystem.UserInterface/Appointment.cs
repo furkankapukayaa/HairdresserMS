@@ -45,8 +45,8 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewAppointment.Columns["Date"].DefaultCellStyle.Format = "dd.MM.yyyy";
             dataGridViewAppointment.Columns["Time"].DefaultCellStyle.Format = "HH:mm";
 
-            dataGridViewAppointment.Columns["Employee"].HeaderText = "Personel";
-            dataGridViewAppointment.Columns["Customer"].HeaderText = "Müşteri";
+            dataGridViewAppointment.Columns["EmployeeId"].HeaderText = "Personel";
+            dataGridViewAppointment.Columns["CustomerId"].HeaderText = "Müşteri";
             dataGridViewAppointment.Columns["Notes"].HeaderText = "Not";
             dataGridViewAppointment.Columns["Date"].HeaderText = "Tarih";
             dataGridViewAppointment.Columns["Time"].HeaderText = "Saat";
@@ -127,8 +127,8 @@ namespace HairdresserManagementSystem.UserInterface
             if (comboBoxAppointmentEmployee.SelectedIndex != -1 && comboBoxAppointmentCustomer.SelectedIndex != -1 && txtAppointmentDescription.Text != string.Empty && listBoxAppointmentSelectedProducts.Items.Count > 0)
             {
                 Entity.DomainObject.Appointment newAppointment = new Entity.DomainObject.Appointment();
-                newAppointment.Employee = comboBoxAppointmentEmployee.SelectedItem as Employee;
-                newAppointment.Customer = comboBoxAppointmentCustomer.SelectedItem as Entity.DomainObject.Customer;
+                newAppointment.EmployeeId = comboBoxAppointmentEmployee.SelectedValue.ToString();
+                newAppointment.CustomerId = comboBoxAppointmentCustomer.SelectedValue.ToString();
                 newAppointment.Notes = txtAppointmentDescription.Text;
                 newAppointment.Date = dateTimePickerAppointmentDate.Value;
                 newAppointment.Time = dateTimePickerAppointmentTime.Value;
@@ -149,23 +149,21 @@ namespace HairdresserManagementSystem.UserInterface
 
         private void dataGridViewAppointment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "Employee" && e.Value != null)
+            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "EmployeeId" && e.Value != null)
             {
-                var employee = (Employee)e.Value;
+                string employeeId = e.Value.ToString();
+                var employee = baseFormObject.hairdresserMSContext.Employees.Find(employeeId);
                 e.Value = employee?.NameSurname ?? "Yok";
             }
 
-            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "Customer" && e.Value != null)
+            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "CustomerId" && e.Value != null)
             {
-                var customer = (Entity.DomainObject.Customer)e.Value;
+                string customerId = e.Value.ToString();
+                var customer = baseFormObject.hairdresserMSContext.Customers.Find(customerId);
                 e.Value = customer?.NameSurname ?? "Yok";
             }
-
-            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "Products" && e.Value is ICollection<Product> products)
-            {
-                e.Value = products != null ? string.Join(", ", products.Select(p => p.Name)) : "Yok";
-            }
         }
+
         private string selectedAppointmentId;
         private void btnAppointmentCancel_Click(object sender, EventArgs e)
         {
@@ -215,7 +213,7 @@ namespace HairdresserManagementSystem.UserInterface
                 selectedAppointment.UpdatedAtTime = DateTime.Now;
                 baseFormObject.hairdresserMSContext.Appointments.Update(selectedAppointment);
                 baseFormObject.hairdresserMSContext.SaveChanges();
-                MessageBox.Show("Randevu başarıyla silindi.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Randevu başarıyla tamamlandı.", "HairdresserManagementSystem", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataList();
             }
         }
