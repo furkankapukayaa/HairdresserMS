@@ -57,6 +57,10 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Products")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -267,6 +271,10 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     b.Property<int>("PaymentType")
                         .HasColumnType("int");
 
+                    b.Property<string>("Products")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -286,9 +294,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AppointmentId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("CategoryId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -306,9 +311,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -319,10 +321,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -366,27 +364,6 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Product", b =>
-                {
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Appointment", null)
-                        .WithMany("Products")
-                        .HasForeignKey("AppointmentId");
-
-                    b.HasOne("HairdresserManagementSystem.Entity.DomainObject.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Appointment", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("HairdresserManagementSystem.Entity.DomainObject.Order", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

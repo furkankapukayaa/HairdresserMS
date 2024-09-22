@@ -48,9 +48,13 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewAppointment.Columns["EmployeeId"].HeaderText = "Personel";
             dataGridViewAppointment.Columns["CustomerId"].HeaderText = "Müşteri";
             dataGridViewAppointment.Columns["Notes"].HeaderText = "Not";
+            if (!dataGridViewAppointment.Columns.Contains("Products"))
+            {
+                dataGridViewAppointment.Columns.Add("Products", "Ürünler");
+                dataGridViewAppointment.Columns["Products"].DisplayIndex = 5;
+            }
             dataGridViewAppointment.Columns["Date"].HeaderText = "Tarih";
             dataGridViewAppointment.Columns["Time"].HeaderText = "Saat";
-            dataGridViewAppointment.Columns["Products"].HeaderText = "Hizmetler";
             dataGridViewAppointment.Columns["Amount"].HeaderText = "Ücret";
             dataGridViewAppointment.Columns["AppointmentStatusType"].HeaderText = "Durum";
 
@@ -132,7 +136,7 @@ namespace HairdresserManagementSystem.UserInterface
                 newAppointment.Notes = txtAppointmentDescription.Text;
                 newAppointment.Date = dateTimePickerAppointmentDate.Value;
                 newAppointment.Time = dateTimePickerAppointmentTime.Value;
-                newAppointment.Products = listBoxAppointmentSelectedProducts.Items.Cast<Product>().ToList();
+                newAppointment.Products = listBoxAppointmentSelectedProducts.Items.Cast<Product>().Select(p => p.Id).ToList();
                 newAppointment.Amount = Math.Round(Convert.ToDouble(txtAppointmentAmount.Text), 2);
                 newAppointment.AppointmentStatusType = AppointmentStatusType.Aktif;
 
@@ -161,6 +165,21 @@ namespace HairdresserManagementSystem.UserInterface
                 string customerId = e.Value.ToString();
                 var customer = baseFormObject.hairdresserMSContext.Customers.Find(customerId);
                 e.Value = customer?.NameSurname ?? "Yok";
+            }
+
+            var products = baseFormObject.hairdresserMSContext.Products.Where(p => !p.IsDeleted).ToList();
+            var productDictionary = products.ToDictionary(p => p.Id.ToString(), p => p.Name);
+
+            if (dataGridViewAppointment.Columns[e.ColumnIndex].Name == "Products" && e.RowIndex >= 0)
+            {
+                var appointment = dataGridViewAppointment.Rows[e.RowIndex].DataBoundItem as Entity.DomainObject.Appointment;
+
+                if (appointment != null && appointment.Products != null)
+                {
+                    var productNames = appointment.Products.Select(id => productDictionary.ContainsKey(id) ? productDictionary[id] : id).ToList();
+
+                    e.Value = string.Join(", ", productNames);
+                }
             }
         }
 

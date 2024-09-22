@@ -5,7 +5,7 @@
 namespace HairdresserManagementSystem.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class dbcreate : Migration
+    public partial class databasecreated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,6 +20,7 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Products = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     AppointmentStatusType = table.Column<int>(type: "int", nullable: false),
                     CreatedAtTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -120,6 +121,7 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                     EmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Products = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tip = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -134,6 +136,25 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CategoryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedAtTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAtTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAtTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,52 +176,14 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Settings", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CategoryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AppointmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    OrderId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedAtTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAtTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedAtTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Appointments_AppointmentId",
-                        column: x => x.AppointmentId,
-                        principalTable: "Appointments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Products_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_AppointmentId",
-                table: "Products",
-                column: "AppointmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_OrderId",
-                table: "Products",
-                column: "OrderId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Appointments");
+
             migrationBuilder.DropTable(
                 name: "Categories");
 
@@ -214,16 +197,13 @@ namespace HairdresserManagementSystem.DataAccess.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Settings");
-
-            migrationBuilder.DropTable(
-                name: "Appointments");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
         }
     }
 }

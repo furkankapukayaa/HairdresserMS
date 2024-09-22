@@ -100,6 +100,7 @@ namespace HairdresserManagementSystem.UserInterface
             }
 
             txtChairTotalAmount.Text = totalAmount.ToString("F2");
+            txtChairTotalAmount2.Text = totalAmount.ToString("F2");
         }
 
         private void listBoxChairProducts_DoubleClick(object sender, EventArgs e)
@@ -189,7 +190,7 @@ namespace HairdresserManagementSystem.UserInterface
                     txtChairTotalAmount2.Text = order.Amount.ToString("F2");
 
                     listBoxChairSelectedProducts.Items.Clear();
-                    listBoxChairSelectedProducts.Items.AddRange(order.Products.ToArray());
+                    listBoxChairSelectedProducts.Items.AddRange(baseFormObject.hairdresserMSContext.Products.Where(x => order.Products.Contains(x.Id)).ToArray());
                     listBoxChairSelectedProducts.DisplayMember = "Name";
                     listBoxChairSelectedProducts.ValueMember = "Id";
                 }
@@ -211,7 +212,7 @@ namespace HairdresserManagementSystem.UserInterface
                 newOrder.EmployeeId = comboBoxChairEmployee.SelectedValue.ToString();
                 newOrder.CustomerId = comboBoxChairCustomer.SelectedValue.ToString();
                 newOrder.Description = txtChairDescription.Text;
-                newOrder.Products = listBoxChairSelectedProducts.Items.Cast<Product>().ToList();
+                newOrder.Products = listBoxChairSelectedProducts.Items.Cast<Product>().Select(p => p.Id).ToList();
                 newOrder.Tip = decimal.TryParse(txtChairTip.Text, out var tipAmount) ? tipAmount : 0;
                 newOrder.Discount = decimal.TryParse(txtChairDiscount.Text, out var discountAmount) ? discountAmount : 0;
                 newOrder.Amount = decimal.TryParse(txtChairTotalAmount2.Text, out var totalAmount) ? totalAmount : 0;
@@ -260,7 +261,7 @@ namespace HairdresserManagementSystem.UserInterface
                 order.EmployeeId = comboBoxChairEmployee.SelectedValue.ToString();
                 order.CustomerId = comboBoxChairCustomer.SelectedValue.ToString();
                 order.Description = txtChairDescription.Text;
-                order.Products = listBoxChairSelectedProducts.Items.Cast<Product>().ToList();
+                order.Products = listBoxChairSelectedProducts.Items.Cast<Product>().Select(p => p.Id).ToList();
                 order.Tip = decimal.TryParse(txtChairTip.Text, out var tipAmount) ? tipAmount : 0;
                 order.Discount = decimal.TryParse(txtChairDiscount.Text, out var discountAmount) ? discountAmount : 0;
                 order.Amount = decimal.TryParse(txtChairTotalAmount2.Text, out var totalAmount) ? totalAmount : 0;

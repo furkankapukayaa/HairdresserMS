@@ -40,7 +40,8 @@ namespace HairdresserManagementSystem.UserInterface
             dataGridViewOrder.Columns["EmployeeId"].HeaderText = "Personel";
             dataGridViewOrder.Columns["CustomerId"].HeaderText = "Müşteri";
             dataGridViewOrder.Columns["Description"].HeaderText = "Not";
-            dataGridViewOrder.Columns["Products"].HeaderText = "Hizmetler";
+            dataGridViewOrder.Columns.Add("Products", "Ürünler");
+            dataGridViewOrder.Columns["Products"].DisplayIndex = 5;
             dataGridViewOrder.Columns["Tip"].HeaderText = "Bahşiş";
             dataGridViewOrder.Columns["Discount"].HeaderText = "İndirim";
             dataGridViewOrder.Columns["Amount"].HeaderText = "Toplam";
@@ -75,27 +76,18 @@ namespace HairdresserManagementSystem.UserInterface
                 e.Value = customer?.NameSurname ?? "Yok";
             }
 
-            int productsColumnIndex = dataGridViewOrder.Columns["Products"].Index;
+            var products = baseFormObject.hairdresserMSContext.Products.Where(p => !p.IsDeleted).ToList();
+            var productDictionary = products.ToDictionary(p => p.Id.ToString(), p => p.Name);
 
-            if (e.ColumnIndex == productsColumnIndex)
+            if (dataGridViewOrder.Columns[e.ColumnIndex].Name == "Products" && e.RowIndex >= 0)
             {
                 var order = dataGridViewOrder.Rows[e.RowIndex].DataBoundItem as Entity.DomainObject.Order;
 
-                if (order != null)
+                if (order != null && order.Products != null)
                 {
-                    if (order.Products != null && order.Products.Any())
-                    {
-                        e.Value = string.Join(", ", order.Products.Select(p => p.Name));
-                        e.FormattingApplied = true;
-                    }
-                    else
-                    {
-                        e.Value = "Products boş";
-                    }
-                }
-                else
-                {
-                    e.Value = "Order boş";
+                    var productNames = order.Products.Select(id => productDictionary.ContainsKey(id) ? productDictionary[id] : id).ToList();
+
+                    e.Value = string.Join(", ", productNames);
                 }
             }
         }

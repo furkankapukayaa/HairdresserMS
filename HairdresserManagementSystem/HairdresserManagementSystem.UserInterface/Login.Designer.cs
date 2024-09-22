@@ -86,7 +86,6 @@
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(198, 29);
             txtMail.TabIndex = 0;
-            txtMail.Text = "admin@hairdresserms";
             // 
             // txtPassword
             // 
@@ -96,7 +95,6 @@
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(198, 29);
             txtPassword.TabIndex = 1;
-            txtPassword.Text = "a";
             // 
             // lblPassword
             // 
